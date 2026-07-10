@@ -1,0 +1,32 @@
+[project]
+name = "costscraper"
+version = "0.1.0"
+description = "Fetch LLM provider pricing and update litellm-config.yaml"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "ruamel.yaml>=0.18.0",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "click>=8.1.0",
+]
+
+[project.scripts]
+costscraper = "costscraper.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/costscraper"]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src/costscraper --cov-report=term-missing --cov-fail-under=70"

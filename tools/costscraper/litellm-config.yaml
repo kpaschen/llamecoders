@@ -1,0 +1,44 @@
+model_list:
+- model_name: gpt-4o
+  litellm_params:
+    model: openai/gpt-4o
+    api_key: os.environ/OPENAI_API_KEY
+    rpm: 2
+
+- model_name: gpt-4o-mini
+  litellm_params:
+    model: openai/gpt-4o-mini
+    api_key: os.environ/OPENAI_API_KEY
+
+- model_name: infomaniak-qwen3.5-122b
+  litellm_params:
+    custom_llm_provider: openai
+    model: Qwen/Qwen3.5-122B-A10B-FP8
+    api_base: https://api.infomaniak.com/2/ai/109660/openai/v1
+    api_key: os.environ/INFOMANIAK_API_KEY
+  model_info:
+    input_cost_per_token: 0.000000496
+    output_cost_per_token: 0.000003968
+
+- model_name: infomaniak-qwen3.5
+  litellm_params:
+    custom_llm_provider: openai
+    model: Qwen/Qwen3.5-397B-A17B-FP8
+    api_base: https://api.infomaniak.com/2/ai/109660/openai/v1
+    api_key: os.environ/INFOMANIAK_API_KEY
+  model_info:
+    input_cost_per_token: 0.000000992
+    output_cost_per_token: 0.000004464
+
+- model_name: infomaniak-kimi
+  litellm_params:
+    custom_llm_provider: openai
+    model: moonshotai/Kimi-K2.6
+    api_base: https://api.infomaniak.com/2/ai/109660/openai/v1
+    api_key: os.environ/INFOMANIAK_API_KEY
+  model_info:
+    input_cost_per_token: 0.000000744
+    output_cost_per_token: 0.00000372
+
+general_settings:
+  master_key: os.environ/MASTER_KEY
