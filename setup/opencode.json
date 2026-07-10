@@ -1,0 +1,36 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "infomaniak": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LLM Proxy",
+      "options": {
+        "baseURL": "192.168.0.50:80",
+        "apiKey": "sk-123"
+      },
+      "models": {
+        "gpt-4o": {
+          "name": "gpt-4o",
+          "limit": {
+            "context": 10000,
+            "output": 5000
+          }
+        },
+        "gpt-4o-mini": {
+          "name": "gpt-4o-mini",
+          "limit": {
+            "context": 10000,
+            "output": 5000
+          }
+        },
+        "infomaniak-kimi": {
+          "name": "infomaniak-kimi"
+        },
+        "infomaniak-qwen3.5": {
+          "name": "infomaniak-qwen3.5"
+        }
+      }
+    }
+  },
+  "model": "infomaniak-kimi"
+}
