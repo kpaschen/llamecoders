@@ -33,7 +33,7 @@ npm install -g opencode-ai
 
 ### Copy the opencode config file
 
-Take the `opencode.json` file from this repository and copy it to `~/.config/opencode/opencode.json`
+Take the `opencode.json` file from the setup/ directory and copy it to `~/.config/opencode/opencode.json`
 
 You should have received a mail with an api key. Put that api key into the opencode.json file in the `apiKey` field.
 
