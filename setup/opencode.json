@@ -5,7 +5,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "LLM Proxy",
       "options": {
-        "baseURL": "192.168.0.50:80",
+        "baseURL": "https://llamas.nephometrics.com",
         "apiKey": "sk-123"
       },
       "models": {

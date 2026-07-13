@@ -7,18 +7,21 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entryPoints.litellm.address=:80"
-#     - "--entryPoints.litellm.address=:443"
-#     - "--certificateresolvers.myresolver.acme.tlschallenge=true"
-#     - "--certificateresolvers.myresolver.acme.email=postmaster@nephometrics.com"
+      - "--entryPoints.http.address=:80"
+      - "--entryPoints.https.address=:443"
+#     - "--certificateresolvers.myresolver.acme.httpchallenge=true"
+#     - "--certificateresolvers.myresolver.acme.httpchallenge.entrypoint=http"
+#     - "--certificateresolvers.myresolver.acme.email=hostmaster@nephometrics.com"
 #     - "--certificateresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    labels:
+      - traefik.http.middlewares.auth.basicauth.users=admin:${TRAEFIK_PASSWORD}
     ports:
       - "80:80"
-      - "8080:8080"
 #      - "443:443"
     volumes:
      - "./letsencrypt:/letsencrypt"
      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: always
     networks:
      - default
 
@@ -63,29 +66,27 @@ services:
     networks:
       - litellm_backend
       - default
-#      - traefik_public # Connects to your existing Traefik network
     labels:
       - traefik.enable=true
       # HTTP Router (Redirects to HTTPS if you have a global redirect, otherwise adjust)
-      # - "traefik.http.routers.litellm.rule=Host(`://yourdomain.com`)"
+      # - "traefik.http.routers.litellm.rule=Host(`llamas.nephometrics.com`)"
       - traefik.http.routers.litellm.rule=Host(`192.168.0.50`)
-      # - traefik.http.routers.litellm.entrypoints=llame
+      - traefik.http.routers.https.entrypoints=https
       # - traefik.http.routers.litellm.tls=true
       # Certresolver name (change to your specific resolver, e.g., letsencrypt, le, defaults)
-      # - "traefik.http.routers.litellm.tls.certresolver=myresolver"
+      # - "traefik.http.routers.https.tls.certresolver=myresolver"
       # Service Target Port inside the container
       - traefik.http.services.litellm.loadbalancer.server.port=4000
 
 networks:
   litellm_backend:
     internal: true # Keeps DB traffic completely isolated from the internet
-#  traefik_public:
-#    external: true # Tells Compose this network already exists on the VM
 
-volumes:                                                                                                                                       
-  pgdata:                                                                                                                                      
-    driver: local                                                                                                                              
-    driver_opts:                                                                                                                               
-      type: none                                                                                                                               
-      o: bind                                                                                                                                  
-      device: /tmp/pgdata/litellm_db  
+volumes:
+  pgdata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      #device: /home/alpaca/pgdata/litellm_db
+      device: /tmp/pgdata/litellm_db
