@@ -28,6 +28,12 @@
         },
         "infomaniak-qwen3.5": {
           "name": "infomaniak-qwen3.5"
+        },
+        "infomaniak_nvidia": {
+          "name": "infomaniak_nvidia"
+        },
+        "infomaniak_gemma": {
+          "name": "infomaniak_gemma"
         }
       }
     }
