@@ -1,0 +1,262 @@
+
+
+Agentic Coding
+
+
+Day 1: Discovering agentic coding
+
+The first day could answer: "What can an agent do, and what do I need to give it so that it can do useful work?"
+
+Day 2: Engineering with an agent
+
+The second day answers: "How do I make this process reliable enough to use for
+serious projects?"
+
+
+==================================================
+
+Day 1 — From coding assistant to coding agent
+
+1. Introduction and motivation
+
+Concepts + demonstration
+    What is agentic coding?
+    Vibe coding vs. agentic coding
+    What can today's agents do?
+    Where do they fail?
+    A short live demonstration
+
+Exercise 1: Give the agent a small task and let participants experience it.
+
+The important thing here is that they get their first "holy crap, it actually
+wrote the program" moment very early.
+
+--------------------------------------------------
+
+2. Setting up your agentic coding environment
+
+Mostly hands-on
+    Editor/IDE
+    Agent
+    Terminal
+    Git repository
+    Running code
+    Tests
+    Giving the agent access to tools
+    Permissions/security
+    Possibly MCP or other integrations, depending on ambition
+
+Exercise 2: Set up the environment and have the agent modify/run a small
+existing project.
+
+This could be deliberately trivial. The purpose isn't learning programming;
+it's learning the agent interaction loop.
+
+--------------------------------------------------
+
+3. A mental model of LLMs
+
+Short conceptual section
+
+I'd keep this considerably shorter than a conventional LLM introduction.
+
+The goal is to explain observations they've just made:
+    tokens
+    context window
+    generation
+    why context matters
+    why the model can be capable and simultaneously confidently wrong
+    tool use
+    agent loops
+
+And then immediately connect it to something practical:
+"If the model only sees the context we provide, how do we make sure it sees
+the right things?"
+
+--------------------------------------------------
+
+4. From problem to specification
+
+Concept + substantial exercise
+
+This could be one of the most important sections of the course.
+
+Start with: "Write a program that analyzes my experimental data."
+
+Then ask: What does the agent actually know?
+
+Introduce:
+    requirements
+    specifications
+    constraints
+    examples
+    acceptance criteria
+    decomposition
+    ambiguities
+
+Then have participants progressively improve the specification.
+
+Exercise: Give the agent the same problem first with a vague request and then
+with a carefully constructed specification.
+
+This gives you a very nice empirical demonstration of why specification
+matters.
+
+--------------------------------------------------
+
+5. Architecture and decomposition
+
+Concept + hands-on
+
+Now the question becomes: "Suppose the specification is clear. How should the
+software be structured?"
+
+Introduce just enough:
+    modules
+    interfaces
+    separation of concerns
+    dependencies
+    abstraction
+    project structure
+
+But constantly connect it back to agents: Architecture is not just about
+making software maintainable by humans. It also constrains what the agent is
+allowed to change.
+
+Exercise: Have participants ask an agent to propose an architecture, critique
+it, and then implement part of it.
+
+--------------------------------------------------
+
+6. Implementing with an agent
+
+Large hands-on component
+
+At this point, they have: problem → specification → architecture
+
+Now they actually build something.
+
+Topics:
+    breaking work into tasks
+    asking the agent to plan
+    implementation
+    inspecting changes
+    iterative interaction
+    context management
+    reviewing generated code
+    committing changes
+
+Exercise: Build a meaningful part of the course project.
+
+And I would probably end Day 1 here. That gives Day 1 a very satisfying arc:
+"I have a problem → I tell the agent what I want → I structure the problem →
+the agent builds it."
+
+==================================================
+
+Day 2 — Making agentic coding reliable
+
+"Okay, but how do I know that what the agent built is actually correct?"
+
+
+7. Testing and evaluation
+
+Concept + hands-on
+
+This is where I'd introduce TDD, but perhaps broaden the concept to feedback
+mechanisms:
+    Unit tests
+    Integration tests
+    Test-driven development
+    Acceptance tests
+    Type checking
+    Linters
+    Static analysis
+    Assertions
+    Evaluation datasets / benchmarks where appropriate
+
+The key conceptual point: Tests are not only for humans. They are feedback
+channels for the agent.
+
+You can actually demonstrate this. Give the agent: "Implement X."
+Then: "Here are the tests." Then deliberately introduce a failing test and let
+the agent diagnose it.
+
+That makes the agentic loop tangible: act → observe → reason → act again
+
+--------------------------------------------------
+
+8. Debugging and refactoring
+
+Now deliberately break the project.
+
+Give them tasks such as:
+    reproduce a bug
+    diagnose it
+    fix it
+    add a regression test
+    refactor a messy component
+    verify that existing functionality still works
+
+This is where they learn that agentic coding isn't:
+prompt → code → done
+
+but rather:
+specify → plan → implement → evaluate → diagnose → modify → evaluate again
+
+And that's really the heart of agentic coding.
+
+--------------------------------------------------
+
+9. Working with larger/long-lived projects
+
+This might be a section worth adding explicitly to your original outline. The
+problems change when the agent is no longer working on a 100-line toy program:
+    large codebases
+    context limitations
+    repository navigation
+    documentation
+    project conventions
+    maintaining consistency
+    incremental changes
+    Git branches/commits
+    keeping the agent from changing unrelated things
+    recovering from bad changes
+
+For PhD students, this is particularly relevant because many of them will use
+agents on research code that evolves over months or years, rather than on
+isolated programming exercises.
+
+--------------------------------------------------
+
+10. Best practices / agentic coding workflow / Conclusion
+
+Then your existing Section 8 becomes the synthesis.
+
+Rather than presenting a list of “10 prompting tips,” I'd make it:
+    The Agentic Coding Workflow
+
+For example:
+
+1. Understand the problem
+↓
+2. Specify the requirements
+↓
+3. Establish the architecture
+↓
+4. Break the work into manageable tasks
+↓
+5. Let the agent implement
+↓
+6. Run objective checks
+↓
+7. Inspect/evaluate the result
+↓
+8. Iterate
+↓
+9. Commit/document
+↓
+10. Repeat
+
+And then discuss the principles behind the workflow.
+

@@ -1,0 +1,3 @@
+dvips -O -10pt,-27pt -T 594pt,792pt agenticcoding.dvi
+dvips -O -10pt,-45pt -T 594pt,792pt agenticcoding.dvi
+

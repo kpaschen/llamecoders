@@ -1,0 +1,22 @@
+
+Agentic Coding
+
+
+1. Motivation/Introduction
+   - general intro (vibe coding vs agentic	coding, anecdotes, etc.)
+
+2. Quick intro to LLMs and how they work
+   - general structure
+   - context windows
+   - tokenizers?
+
+3. Overview of Software Engineering Principles
+
+4./5./6./7. go deeper into aspects of 3. (specs, software
+architecture/modules, test-driven development, generating/writing code,
+evaluating/testing/debugging/refactoring code)
+
+8. Best Practices for Agentic Coding
+
+9. Conclusion
+
