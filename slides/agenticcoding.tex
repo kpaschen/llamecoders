@@ -93,17 +93,17 @@ Introduction
 
 
 \begin{quote}
-``No more humans coding in 5 years.''
+\emph{``No more humans coding in 5 years.''}
 \end{quote}
 \hfill Emad Mostaque
 
 \begin{quote}
-``AI will write most of the code soon and perform better than top coders.''
+\emph{``AI will write most of the code soon and perform better than top coders.''}
 \end{quote}
 \hfill Mark Zuckerberg
 
 \begin{quote}
-``It's our job to create computing technology such that nobody has to program.''
+\emph{``It's our job to create computing technology such that nobody has to program.''}
 \end{quote}
 \hfill Jensen Huang
 
@@ -116,9 +116,7 @@ Introduction
 
 \begin{itemize}
 
-\item We have a slightly different opinion
-
-\item This is not the first hype we have seen
+\item This is not the first hype we have seen:
 
 \end{itemize}
 
@@ -128,11 +126,7 @@ Introduction
 
 \begin{itemize}
 
-\item We will try to bring some substance to this discussion
-
 \end{itemize}
-
-% comment: video dbs/datascience.mkv
 
 \end{slide}
 
@@ -153,7 +147,7 @@ Introduction
   
 \end{itemize}
   
-\item Currently, AI boosts the skills of experienced experts
+\item Currently, AI boosts the skills of experts
 
 \item It will not save you if you have no clue what you're doing
 
@@ -182,9 +176,13 @@ Introduction
 \end{itemize}
 
 \vspace*{.5cm}
+
 \begin{center}
-\includegraphics[width=8cm]{pics/vibevsagentic.eps}
+\includegraphics[width=2cm]{pics/scylla.eps}
+\includegraphics[width=7cm]{pics/vibevsagentic.eps}
+\includegraphics[width=2cm]{pics/charybdis.eps}
 \end{center}
+
 
 \end{slide}
 
@@ -463,6 +461,33 @@ The Environment
 
 
 
+\begin{slide}{Model Context Protocol (MCP)}
+
+\begin{itemize}
+
+\item We just mention it for sake of completeness
+
+\item It is an open standard specifying how LLMs share data with external
+  tools
+
+\item MCP offers a standardized interface for
+
+  \begin{itemize}
+
+  \item reading files
+
+  \item executing functions
+
+  \item handling prompts
+
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
 \begin{slide}{Summary}
 
 \begin{itemize}
@@ -482,6 +507,305 @@ The Environment
 
 
 
+\begin{slide}{Chapter 3}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+A Mental Model of LLMs and Agentic Coding
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+
+
+
+\begin{slide}{Introduction}
+
+\begin{itemize}
+
+\item The aim is not to give a detailed technical description of LLMs (and the
+  agents utilizing them)
+
+\begin{itemize}
+
+\item You don't need to build an LLM or agent,
+
+\item but to understand how they react to your input
+
+\end{itemize}
+
+\item In a nutshell, an LLM is autocomplete on steroids
+
+\begin{itemize}
+
+\item It doesn't look up an answer
+
+\item It generates its response incrementally, depending on the context and
+  the data it was trained on
+
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Autocomplete vs. LLM}
+
+\begin{itemize}
+
+\item If you type a message on your phone, it tries to predict how the message
+  continues
+
+\begin{itemize}
+  
+\item Uses a dictionary and probabilities for continuations
+
+\end{itemize}
+  
+\item An LLM works at a different scale
+
+\begin{itemize}
+
+\item Instead of a dictionary, uses a neural network with billions or
+  trillions of parameters
+
+\item Utilizes a much larger context (thousands of words)
+
+\item Depending on the setting, it may not always return the most probable answer
+  
+\end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Tokens}
+
+\begin{itemize}
+
+\item An LLM doesn't work with words, uses tokens instead
+
+\item We only give a brief introduction to tokens
+
+\item What do tokens look like?
+  
+\begin{itemize}
+
+\item (Short) words, e.g. house
+
+\item Parts of words, e.g. un con stitu tion al
+
+\item Punctuation, whitespace, emojis
+  
+\end{itemize}
+
+\item Tokens are used
+
+\begin{itemize}
+  
+\item to avoid vocabulary explosion
+\item identify new words
+\item describe concepts independent of language
+
+\end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Generating an Answer}
+
+\begin{itemize}
+
+\item Context: current prompt and previous input/output
+
+\item An LLM then generates a plausible continuation: \\
+context $\rightarrow$ next token $\rightarrow$ next token $\rightarrow$ next token
+
+\item A generated token is added to the context
+
+\item The \emph{context window} plays a crucial role
+  
+\end{itemize}
+
+\vspace*{-.3cm}
+\begin{center}
+\includegraphics[height=4.5cm]{pics/contextwindowparadox.eps}
+\end{center}
+
+
+\end{slide}
+
+
+
+
+\begin{slide}{Context Window}
+
+\begin{itemize}
+
+\item Process is driven by the content of the context window
+
+  \begin{itemize}
+  
+  \item This window is not infinitely large
+    
+  \item Higher recall at edges (beginning/end)
+
+\end{itemize}
+  
+\item Some similarity to our working memory
+
+  \begin{itemize}
+
+  \item Can hold seven chunks of information (+/-2)
+
+  \item Serial position effect (easier to remember start/end)
+    
+  \end{itemize}
+
+\end{itemize}
+
+\vspace*{.5cm}
+
+\begin{itemize}
+  
+\item Takeaway: if we want good results, we have to provide the right context
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{From Chatbot to Agent}
+
+\begin{itemize}
+
+\item We don't want to use the LLM in the following way: \\
+  prompt $\rightarrow$ answer
+
+\item First of all, there's an issue with reliability
+
+  \begin{itemize}
+
+  \item LLMs can be confidently incorrect
+  
+  \end{itemize}
+
+\item Given a prompt (and all their learned patterns), an LLM gives plausible
+  answers
+
+  \begin{itemize}
+
+  \item LLMs do not know what the outside world looks like
+  
+  \end{itemize}
+
+\item We want evidence for correctness
+
+  \begin{itemize}
+
+  \item Idea: give LLMs access to tools for checking
+  
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{From Chatbot to Agent (2)}
+
+\begin{itemize}
+
+\item We want to follow a loop:
+
+\vspace*{-.1cm}
+\begin{center}
+\includegraphics[height=6cm]{pics/loop.eps}
+\end{center}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{From Chatbot to Agent (3)}
+
+\begin{itemize}
+
+\item In the context of coding, we provide tools such as
+
+  \begin{itemize}
+    
+  \item Requirement/specification documents
+    
+  \item Code files
+    
+  \item Tests
+    
+  \item Current repository and history
+    
+  \item External documentation
+    
+  \end{itemize}
+
+\item In agentic coding, the LLM itself is not the agent
+
+  \begin{itemize}
+
+  \item It's the system around it implementing the loop
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Summary}
+
+\begin{itemize}
+
+\item We covered a basic mental model of LLMs and agents
+
+\item Helps you in answering questions like:
+
+  \begin{itemize}
+
+  \item Why did the LLM/agent just do this?
+
+  \item How can I make it behave differently?
+
+  \end{itemize}
+
+\item We briefly explained how LLMs/agents interact with the outside world
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
 \begin{slide}{}
 
 \begin{itemize}
@@ -494,6 +818,7 @@ The Environment
 
 
 
+
 \begin{slide}{}
 
 \begin{itemize}
@@ -503,6 +828,59 @@ The Environment
 \end{itemize}
   
 \end{slide}
+
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
 
 
 
