@@ -330,11 +330,44 @@ Introduction
 
 
 
-\begin{slide}{}
 
+\begin{slide}{Chapter 2}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+The Environment
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+
+
+
+\begin{slide}{Basics}
+
+%\vspace*{.5cm}
+\begin{center}
+\includegraphics[width=6cm]{pics/copycutpaste.eps}
+\end{center}
+  
 \begin{itemize}
 
-\item 
+\item What we don't want to do:
+
+\begin{itemize}
+  
+\item Prompting LLM on a web interface 
+
+\item Then copy/pasting code into file
+
+\end{itemize}
+
+\item We use a more sophisticated environment
 
 \end{itemize}
   
@@ -342,14 +375,109 @@ Introduction
 
 
 
-\begin{slide}{}
+\begin{slide}{Overview}
+
+\vspace*{.5cm}
+\begin{center}
+\includegraphics[height=6cm]{pics/overview.eps}
+\end{center}
+  
+\end{slide}
+
+
+
+\begin{slide}{OpenCode}
 
 \begin{itemize}
 
-\item 
+\item OpenCode is an open-source coding tool
+
+\item Connects LLMs to development tools
+
+\item Model-agnostic: can run (almost) every model you want
+
+\item By default, stores code locally
+
+\end{itemize}
+
+\vspace*{.5cm}
+\begin{center}
+\includegraphics[width=7cm]{pics/opencode.eps}
+\end{center}
+
+
+\end{slide}
+
+
+
+\begin{slide}{Interaction with Files}
+
+\begin{itemize}
+
+\item OpenCode is not an editor:
+
+\begin{itemize}
+
+\item You can use any editor you want (VS Code, Emacs, IntelliJ) to look at
+  the files
+
+\item OpenCode executes commands in a terminal
+
+\end{itemize}
+
+\item With these commands it can manipulate files and use other tools
+
+\begin{itemize}
+
+\item This has direct implications on security
+
+\end{itemize}
 
 \end{itemize}
   
+\end{slide}
+
+
+
+\begin{slide}{Repositories}
+
+\begin{itemize}
+
+\item A repository is where a version control system (VCS) stores its data
+
+\item A VCS tracks and manages changes to files
+
+\begin{itemize}
+
+\item Heavily used in managing source code
+
+\end{itemize}
+
+\item Allows to revert to a previous state
+
+\item Facilitates collaboration 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Summary}
+
+\begin{itemize}
+
+\item This chapter is kept short on purpose
+
+\item We show how to set up and use this environment in hands-on exercises
+
+\end{itemize}
+
+\vspace*{.5cm}
+\begin{center}
+\includegraphics[width=9cm]{pics/theoryvspractice.eps}
+\end{center}
+
 \end{slide}
 
 
