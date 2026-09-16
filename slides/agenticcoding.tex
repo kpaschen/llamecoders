@@ -327,6 +327,7 @@ Introduction
 \end{slide}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{slide}{Chapter 2}
@@ -506,6 +507,8 @@ The Environment
 \end{slide}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{slide}{Chapter 3}
 
@@ -518,9 +521,6 @@ A Mental Model of LLMs and Agentic Coding
 \end{center}
 
 \end{slide}
-
-
-
 
 
 
@@ -804,13 +804,47 @@ context $\rightarrow$ next token $\rightarrow$ next token $\rightarrow$ next tok
 \end{slide}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{slide}{}
+\begin{slide}{Chapter 4}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+From Problem to Specification
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+\begin{slide}{Introduction}
+
+\vspace*{-.5cm}
+\begin{center}
+\includegraphics[height=4.2cm]{pics/baizhiweimindreadingfairy.eps}
+\end{center}
+\vspace*{-.2cm}
+
 
 \begin{itemize}
 
-\item 
+\item LLMs/agents don't magically know what you mean
+
+\item An agent can only implement
+
+\begin{itemize}
+
+\item what you have specified
+
+\item or what it can safely infer
+
+\end{itemize}
+
+\item Inferring wrongly is dangerous
 
 \end{itemize}
   
@@ -819,11 +853,22 @@ context $\rightarrow$ next token $\rightarrow$ next token $\rightarrow$ next tok
 
 
 
-\begin{slide}{}
+\begin{slide}{A Cautionary Tale}
 
 \begin{itemize}
 
-\item 
+\item Assume you want to analyze some experimental data
+
+\item You enter the following as a prompt: \\
+  ``Write a program that analyzes experimental data.''
+
+\item What do you expect the agent to produce?
+
+\vspace*{.2cm}
+\begin{center}
+\includegraphics[height=4.4cm]{pics/messycode.eps}
+\end{center}
+  
 
 \end{itemize}
   
@@ -832,11 +877,245 @@ context $\rightarrow$ next token $\rightarrow$ next token $\rightarrow$ next tok
 
 
 
-\begin{slide}{}
+\begin{slide}{A Cautionary Tale (2)}
 
 \begin{itemize}
 
-\item 
+\item To generate sensible code, an agent needs to know:
+
+  \begin{itemize}
+    
+  \item What kind of experiment?
+
+  \item What do we mean by ``analyze''?
+
+  \item Which questions do we want answered?
+    
+  \item What does the data look like?
+
+  \item What output do we want?
+
+  \item Who will use the result?
+
+  \item How do we check correctness?
+    
+  \end{itemize}
+
+\item We need to define a lot of different aspects
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Covering Different Aspects}
+
+\begin{itemize}
+
+\item \textbf{Problem}: what is the general goal?
+
+\item \textbf{Requirements}: what should the program do?
+
+\item \textbf{Specification}: how should it do it?
+
+\item \textbf{Constraints}: what must/mustn't it do?
+
+\item \textbf{Acceptance criteria}: how do we check it's correct?
+
+\item \textbf{Examples}: what do concrete use cases look like?
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Back to Our Example}
+
+\begin{itemize}
+
+\item Problem
+  
+\begin{itemize}
+
+\item Analyze my experimental data
+
+\end{itemize}
+
+\item Requirements
+  
+\begin{itemize}
+
+\item Load CSV files
+\item Calculate summary statistics
+\item Identify outliers
+\item Produce plots
+
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Back to Our Example (2)}
+
+\begin{itemize}
+
+\item Specification
+
+\begin{itemize}
+
+\item For each CSV file
+  
+\begin{itemize}
+
+\item group measurements by experimental condition
+\item compute mean, median and standard deviation
+\item identify observations more than 3 standard deviations from the group mean
+\item \dots
+
+\end{itemize}
+
+\end{itemize}
+
+\item Constraints
+
+\begin{itemize}
+
+\item For the plots, use matplotlib
+\item Don't use Python versions older than 3.14
+\item Don't modify the original data files
+
+\end{itemize}
+
+\end{itemize}
+
+
+\end{slide}
+
+
+
+
+\begin{slide}{Back to Our Example (3)}
+
+\begin{itemize}
+
+\item Acceptance criteria
+  
+\begin{itemize}
+
+\item A handcrafted example (with known output) produces the same output
+\item \texttt{results.csv} has to pass some statistical tests
+
+
+\end{itemize}
+
+\item Examples
+  
+\begin{itemize}
+
+\item Provide typical snippets of experimental data
+\item Also include some edge cases
+  
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Resolving Ambiguities}
+
+\begin{itemize}
+
+\item What happens if we don't provide this information?
+
+\item LLMs always give an answer
+
+\item They resolve ambiguities by filling in the gaps
+
+  \begin{itemize}
+
+    \item Based on the most plausible options from training
+
+  \end{itemize}
+
+\item This is probably not what you wanted it to do
+  
+\end{itemize}
+
+\vspace*{-.3cm}
+\begin{center}
+\includegraphics[height=4.6cm]{pics/directionless.eps}
+\end{center}
+  
+
+\end{slide}
+
+
+
+
+\begin{slide}{Decomposition}
+
+\begin{itemize}
+
+\item Once the specification is done, ask the following: \\
+  Can this be broken down into smaller subtasks?
+
+\item For analyzing experimental data, this could look like
+
+\begin{itemize}
+
+\item Load data (specifying input format + validation)
+
+\item Group observations
+
+\item Calculate statistics
+
+\item Detect outliers
+
+\item Write results
+
+\item Generate plots
+
+\item Decide whether to accept analysis
+
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Decomposition (2)}
+
+\begin{itemize}
+
+\item Gives you checkpoints
+
+  \begin{itemize}
+    
+  \item Instead of producing thousands of lines of code,
+
+  \item implements and verifies one part at a time
+    
+  \end{itemize}
+
+\item Also helps with resolving ambiguities
+
+\begin{itemize}
+
+\item Can now also be done for one part at a time
+
+\end{itemize}
 
 \end{itemize}
   
@@ -845,38 +1124,62 @@ context $\rightarrow$ next token $\rightarrow$ next token $\rightarrow$ next tok
 
 
 
-\begin{slide}{}
+\begin{slide}{Mapping to Agentic Loop}
 
 \begin{itemize}
 
-\item 
+\item Maps nicely onto the loop from the previous chapter:
+
+\begin{itemize}
+
+\item Perceive Goal -- Problem
+
+\item Plan Steps -- Specification
+
+\item Act -- Implement
+
+\item Observe Results -- Check Acceptance Criteria
 
 \end{itemize}
-  
+
+\item If it isn't working, refine specification
+
+\end{itemize}
+
+\vspace*{-.1cm}
+\begin{center}
+\includegraphics[height=3.6cm]{pics/loop.eps}
+\end{center}
+
 \end{slide}
 
 
 
 
-\begin{slide}{}
+\begin{slide}{Summary}
 
 \begin{itemize}
 
-\item 
+\item Agentic coding is not about finding the ``magic'' prompt
 
-\end{itemize}
+\item It's about (systematically) getting rid of ambiguities
+
+  \begin{itemize}
+    
+  \item If we don't, an LLM will fill gaps on its own
+    
+  \end{itemize}
   
-\end{slide}
+\item So, if things don't work
 
+  \begin{itemize}
+    
+  \item Don't ask an agent to fix the code
 
-
-
-\begin{slide}{}
-
-\begin{itemize}
-
-\item 
-
+  \item Instead, go over the specification
+    
+  \end{itemize}
+  
 \end{itemize}
   
 \end{slide}
