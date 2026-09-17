@@ -177,10 +177,17 @@ Introduction
 
 \end{itemize}
 
-\vspace*{.5cm}
-
 % In der Mitte braucht es noch ein Bild von Odysseus: 
 % https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Head_Odysseus_MAR_Sperlonga.jpg/250px-Head_Odysseus_MAR_Sperlonga.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail
+
+\vspace*{-.2cm}
+
+\begin{center}
+\includegraphics[width=2cm]{pics/odysseus.eps}
+\end{center}
+
+\vspace*{-1.2cm}
+
 \begin{center}
 \includegraphics[width=2cm]{pics/scylla.eps}
 \includegraphics[width=7cm]{pics/vibevsagentic.eps}
@@ -207,7 +214,7 @@ Introduction
 
 \item User tries it out, notices some things that do not work
 
-\item User writes another prompt requesting some changes
+\item User writes another prompt requesting changes
 
 \item LLM changes code
 
@@ -603,9 +610,9 @@ A Mental Model of LLMs and Agentic Coding
   
 \begin{itemize}
 
-\item (Short) words, e.g. \it{house}
+\item (Short) words, e.g. \textit{house}
 
-\item Parts of words, e.g. \it{un con stitu tion al}
+\item Parts of words, e.g. \textit{un con stitu tion al}
 
 \item Punctuation, whitespace, emojis
   
@@ -668,7 +675,7 @@ context $\rightarrow$ next token $\rightarrow$ next token $\rightarrow$ next tok
 
 \end{itemize}
   
-\item Some similarity to our working memory
+\item Some similarity to our brain's working memory
 
   \begin{itemize}
 
@@ -828,9 +835,9 @@ From Problem to Specification
 
 \vspace*{-.5cm}
 \begin{center}
-\includegraphics[height=4.2cm]{pics/baizhiweimindreadingfairy.eps}
+\includegraphics[height=3.7cm]{pics/baizhiweimindreadingfairy.eps}
 \end{center}
-\vspace*{-.2cm}
+\vspace*{-.3cm}
 
 
 \begin{itemize}
@@ -847,7 +854,9 @@ From Problem to Specification
 
 \end{itemize}
 
-\item If your specification has gaps, the agent will fill them. The results can cover the entire range from \it{hilarious} to \it{dangerous}.
+\item If your specification has gaps, the agent will fill them
+
+\item Results can range from \textit{hilarious} to \textit{dangerous}
 
 \end{itemize}
   
@@ -1392,12 +1401,90 @@ Structuring the Code
     
   \end{itemize}
 
-\item In agentic coding, it also sets boundaries
+\item In agentic coding, they also set boundaries
   
 \end{itemize}
   
 \end{slide}
 
+
+
+\begin{slide}{Responsibilities}
+
+\begin{itemize}
+
+\item Ideally, a module should perform one specific task
+
+\item Questions to ask yourself are:
+
+  \begin{itemize}
+  
+  \item Does every module have a clear purpose?
+
+  \item Are any modules doing too many unrelated things?
+
+  \item Are there unnecessary modules?
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Interfaces}
+
+\begin{itemize}
+
+\item The interface defines how the outside world interacts with a module
+
+\item Should not reveal internal implementation details
+
+\item States which services a module provides
+
+\item Questions to ask yourself are:
+
+  \begin{itemize}
+  
+  \item What does each module expose?
+
+  \item Are the interfaces simple?
+
+  \item How much do modules need to know about each other?
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Dependencies}
+
+\begin{itemize}
+
+\item A module $A$ depends on module $B$ if it relies on the functionality of $B$ to
+  work correctly
+
+\item There is also indirect, transitive dependency
+
+\item High dependency makes code hard to change or test independently
+
+  \begin{itemize}
+  
+  \item Which modules depend on which?
+
+  \item Are there circular dependencies?
+
+  \item Could a change in one modules unnecessarily affect many others?
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
 
 
 
