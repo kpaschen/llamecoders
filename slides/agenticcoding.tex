@@ -37,6 +37,8 @@
 \usepackage{eurosym}
 \usepackage{moresize}
 \usepackage{xcolor}
+\usepackage{dirtree}
+
 
 %\usepackage[algo2e,vlined,linesnumbered]{algorithm2e}
 %\usepackage[ruled,vlined]{algorithm2e}
@@ -951,7 +953,7 @@ From Problem to Specification
 \item Load CSV files
 \item Calculate summary statistics
 \item Identify outliers
-\item Produce plots
+\item Produce result file and plots
 
 \end{itemize}
   
@@ -1117,6 +1119,8 @@ From Problem to Specification
 
 \end{itemize}
 
+\item We talk more about decomposition in the next chapter
+
 \end{itemize}
   
 \end{slide}
@@ -1186,6 +1190,264 @@ From Problem to Specification
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 5}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+Structuring the Code
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+
+
+\begin{slide}{Motivation}
+
+\begin{itemize}
+
+\item We could throw all the code into one big file
+
+\item For instance, by prompting
+
+  \begin{itemize}
+    
+  \item Write a program that reads data from CSV-files, cleans it, computes
+    statistics, detects outliers, \dots
+
+  \item Implement the above specification
+    
+  \end{itemize}
+  
+\item An LLM would happily create a single program containing hundreds of
+  lines of code
+
+\item Program may work correctly but why is this a bad idea?
+  
+\end{itemize}
+
+
+\end{slide}
+
+
+
+
+\begin{slide}{Motivation (2)}
+
+
+\vspace*{-.3cm}
+\begin{center}
+\includegraphics[height=3.5cm]{pics/spaghetticode.eps}
+\end{center}
+\vspace*{-.3cm}
+
+
+\begin{itemize}
+
+\item Code like this is hard to follow and maintain
+
+\item This is the case not just for humans
+
+\item An LLM will also have problems
+  
+\begin{itemize}
+  
+\item The size of the context window is limited
+
+\item If the program becomes too large, it will not fit
+
+\item So, an LLM may be missing important information
+  
+\end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Decomposition}
+
+\begin{itemize}
+
+\item Specification says what and how things are done
+
+\item Decomposition breaks functionality into pieces and sets up boundaries
+  between them
+
+  \begin{itemize}
+    
+  \item Determines what is done where
+
+  \item Defines how pieces interact
+    
+  \end{itemize}
+
+\end{itemize}
+
+\vspace*{-.3cm}
+\begin{center}
+  \includegraphics[height=4.5cm]{pics/architecture.eps}
+\end{center}
+\vspace*{-.3cm}
+
+
+
+\end{slide}
+
+
+
+
+\begin{slide}{Architecture vs. Design}
+
+\begin{itemize}
+
+\item Software developers use different terminology when it comes to
+  structuring code
+
+  \begin{itemize}
+    
+  \item Architecture: high-level view of a system's structure
+    
+  \item Design: more concerned with individual components
+    
+  \end{itemize}
+
+\item There is no strict boundary between the two
+
+\item We're not going into details here
+
+  \begin{itemize}
+    
+  \item Important for you: you need to structure the code
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Modules}
+
+\begin{itemize}
+
+\item In Python, modules structure your code
+
+\item A module is simply a file containing Python code
+
+\item E.g., we could introduce the following structure:
+  
+\end{itemize}
+
+\vspace*{-.3cm}
+\begin{scriptsize}
+\dirtree{%
+.1 project/.
+.2 data/.
+.3 \mbox{loader.py}.
+.3 \mbox{cleaning.py}.
+.2 analysis/.
+.3 \mbox{statistics.py}.
+.3 \mbox{outliers.py}.
+.2 reporting/.
+.3 \mbox{results.py}.
+.2 visualization/.
+.3 \mbox{plot.py}.
+.2 \mbox{main.py}.
+}
+\end{scriptsize}
+
+\end{slide}
+
+
+
+
+\begin{slide}{Modules (2)}
+
+\begin{itemize}
+
+\item It's not about how many files there should be
+  
+\item In software development, modules are about
+
+  \begin{itemize}
+
+  \item responsibilities
+
+  \item interfaces
+
+  \item dependencies
+    
+  \end{itemize}
+
+\item In agentic coding, it also sets boundaries
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+
+
+\begin{slide}{Modules (2)}
+
+\begin{itemize}
+
+\item It's not about how many files there should be
+
+\item It's about separating responsibilities
+
+\item Let's assume everything is in \texttt{main.py}
+
+\item You want to modify the outlier detection
+
+\begin{itemize}
+
+\item The agent will edit \texttt{main.py} and may change other parts of the
+  code as well
+
+\end{itemize}
+
+\item Now assume the code for the outlier detection is solely in
+  \texttt{outlier.py}
+
+ \begin{itemize}
+
+\item You can tell the agent to only touch code in this file
+
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Interfaces}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
 
 \begin{slide}{}
 
@@ -1196,6 +1458,103 @@ From Problem to Specification
 \end{itemize}
   
 \end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
 
 
 
