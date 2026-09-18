@@ -296,9 +296,9 @@ Introduction
 
 \item AI gets stuck in infinite loops
 
-\item Deliver incorrect solutions confidently
+\item Delivers incorrect solutions confidently
 
-\item Cheat: optimize for validation such as benchmarks
+\item Cheats: optimize for validation such as benchmarks
   
 \item Implements what you said, not what you meant
 
@@ -586,6 +586,12 @@ A Mental Model of LLMs and Agentic Coding
 \item Instead of a dictionary, uses a neural network with billions or
   trillions of parameters
 
+  \begin{itemize}
+
+    \item Not just larger, also tries to generalize
+    
+  \end{itemize}
+  
 \item Utilizes a much larger context (thousands of words)
 
 \item Depending on the setting, it may not always return the most probable answer
@@ -1195,7 +1201,18 @@ From Problem to Specification
   \end{itemize}
   
 \end{itemize}
-  
+
+\vspace*{.2cm}
+
+\begin{scriptsize}
+\begin{quote}
+\emph{``On two occasions I have been asked, – `Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?' ... I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.''}
+\end{quote}
+\hfill Charles Babbage
+\end{scriptsize}
+
+
+
 \end{slide}
 
 
@@ -1474,7 +1491,7 @@ Structuring the Code
 
   \begin{itemize}
   
-  \item Which modules depend on which?
+  \item Which modules depend on which other modules?
 
   \item Are there circular dependencies?
 
@@ -1489,35 +1506,25 @@ Structuring the Code
 
 
 
-
-\begin{slide}{Modules (2)}
-
-\begin{itemize}
-
-\item It's not about how many files there should be
-
-\item It's about separating responsibilities
-
-\item Let's assume everything is in \texttt{main.py}
-
-\item You want to modify the outlier detection
+\begin{slide}{Agent Boundaries}
 
 \begin{itemize}
 
-\item The agent will edit \texttt{main.py} and may change other parts of the
-  code as well
+\item Code structure defines the working environment
 
-\end{itemize}
+\item An agent is able to work locally:
 
-\item Now assume the code for the outlier detection is solely in
-  \texttt{outlier.py}
+  \begin{itemize}
+    
+  \item A module's implementation can be changed without affecting the
+    environment outside
 
- \begin{itemize}
-
-\item You can tell the agent to only touch code in this file
-
-\end{itemize}
+  \item A good interface tells an agent what it may rely on without looking at
+    the inner workings
+    
+  \end{itemize}
   
+
 \end{itemize}
   
 \end{slide}
@@ -1525,51 +1532,85 @@ Structuring the Code
 
 
 
-\begin{slide}{Interfaces}
+
+\begin{slide}{Agent Boundaries (2)}
 
 \begin{itemize}
 
-\item 
+\item This has an impact on
 
+  \begin{itemize}
+    
+  \item where an agent searches for making changes
+
+  \item what the agent changes
+
+  \item how much unrelated code it can affect
+
+  \item how easily changes can be reviewed
+    
+  \end{itemize}
+
+\item You can explicitly tell an agent to make changes to only one module (or
+  few modules)
+
+\item Ultimately, this lowers the amount of information needed in the context window
+  
 \end{itemize}
   
 \end{slide}
 
 
 
-\begin{slide}{}
+\begin{slide}{Agent Boundaries (3)}
 
 \begin{itemize}
 
-\item 
+\item Questions to ask yourself are:
 
+  \begin{itemize}
+  
+  \item If an agent is told to modify functionality, which file should it look
+    at (and is this obvious)?
+      
+  \item Can it make the change without modifying a number of other modules?
+
+  \item May an agent accidentally cross boundaries?
+    
+  \end{itemize}
+  
 \end{itemize}
   
 \end{slide}
 
 
 
-\begin{slide}{}
+\begin{slide}{Summary}
 
 \begin{itemize}
 
-\item 
+\item Don't let the agent turn a specification directly into a pile of code.
 
+\item First, decide how to divide the problem into components and decide where
+  the boundaries are
+
+\item Then let the agent implement within these boundaries
+
+\item You can let the agent propose a code structure, but you should not
+  delegate all decisions to it
+
+\begin{itemize}
+
+\item For larger projects, agents have a tendency to create too many modules
+
+\end{itemize}
+  
+  
 \end{itemize}
   
 \end{slide}
 
 
-
-\begin{slide}{}
-
-\begin{itemize}
-
-\item 
-
-\end{itemize}
-  
-\end{slide}
 
 
 
