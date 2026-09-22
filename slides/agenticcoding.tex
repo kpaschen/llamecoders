@@ -37,6 +37,8 @@
 \usepackage{eurosym}
 \usepackage{moresize}
 \usepackage{xcolor}
+\usepackage{dirtree}
+
 
 %\usepackage[algo2e,vlined,linesnumbered]{algorithm2e}
 %\usepackage[ruled,vlined]{algorithm2e}
@@ -93,17 +95,17 @@ Introduction
 
 
 \begin{quote}
-``No more humans coding in 5 years.''
+\emph{``No more humans coding in 5 years.''}
 \end{quote}
 \hfill Emad Mostaque
 
 \begin{quote}
-``AI will write most of the code soon and perform better than top coders.''
+\emph{``AI will write most of the code soon and perform better than top coders.''}
 \end{quote}
 \hfill Mark Zuckerberg
 
 \begin{quote}
-``It's our job to create computing technology such that nobody has to program.''
+\emph{``It's our job to create computing technology such that nobody has to program.''}
 \end{quote}
 \hfill Jensen Huang
 
@@ -116,9 +118,7 @@ Introduction
 
 \begin{itemize}
 
-\item We have a slightly different opinion
-
-\item This is not the first hype we have seen
+\item This is not the first hype we have seen:
 
 \end{itemize}
 
@@ -128,11 +128,7 @@ Introduction
 
 \begin{itemize}
 
-\item We will try to bring some substance to this discussion
-
 \end{itemize}
-
-% comment: video dbs/datascience.mkv
 
 \end{slide}
 
@@ -153,7 +149,7 @@ Introduction
   
 \end{itemize}
   
-\item Currently, AI boosts the skills of experienced experts
+\item Currently, AI boosts the skills of experts
 
 \item It will not save you if you have no clue what you're doing
 
@@ -181,10 +177,23 @@ Introduction
 
 \end{itemize}
 
-\vspace*{.5cm}
+% In der Mitte braucht es noch ein Bild von Odysseus: 
+% https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Head_Odysseus_MAR_Sperlonga.jpg/250px-Head_Odysseus_MAR_Sperlonga.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail
+
+\vspace*{-.2cm}
+
 \begin{center}
-\includegraphics[width=8cm]{pics/vibevsagentic.eps}
+\includegraphics[width=2cm]{pics/odysseus.eps}
 \end{center}
+
+\vspace*{-1.2cm}
+
+\begin{center}
+\includegraphics[width=2cm]{pics/scylla.eps}
+\includegraphics[width=7cm]{pics/vibevsagentic.eps}
+\includegraphics[width=2cm]{pics/charybdis.eps}
+\end{center}
+
 
 \end{slide}
 
@@ -203,9 +212,9 @@ Introduction
 
 \item LLM generates some code
 
-\item User tries it out, doesn't quite work
+\item User tries it out, notices some things that do not work
 
-\item User writes another prompt requesting some changes
+\item User writes another prompt requesting changes
 
 \item LLM changes code
 
@@ -224,22 +233,22 @@ Introduction
 
 \begin{itemize}
 
-\item This is not about writing simple prompts
-
-\item Gives an LLM specific software development tasks in a systematic way,
+\item Gives an LLM specific software development tasks,
   such as:
 
 \begin{itemize}
 
-\item Formulate goal, e.g., in form of a specification
+\item Specify goal
 
-\item Devise a plan, break up general task into subtasks
+\item Devise a plan: break up overall task into subtasks
 
 \item Generate code
 
-\item Validate code, e.g., by running tests
+\item Validate code (for example by running tests)
 
-\item If necessary, revise implementation (or even planning)
+\item Revise plan or implementation
+
+\item Repeat until satisfied
 
 \end{itemize}
 
@@ -253,8 +262,7 @@ Introduction
 
 \begin{itemize}
 
-\item That doesn't necessarily mean that vibe coding is bad and agentic coding
-  is good
+\item Vibe coding isn't always bad, and agentic coding isn't always the right approach
 
 \item Vibe coding:
 
@@ -288,9 +296,9 @@ Introduction
 
 \item AI gets stuck in infinite loops
 
-\item Deliver incorrect solutions confidently
+\item Delivers incorrect solutions confidently
 
-\item Cheat: optimize for validation such as benchmarks
+\item Cheats: optimize for validation such as benchmarks
   
 \item Implements what you said, not what you meant
 
@@ -329,12 +337,1439 @@ Introduction
 \end{slide}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{slide}{}
+
+\begin{slide}{Chapter 2}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+The Environment
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+
+
+
+\begin{slide}{Basics}
+
+%\vspace*{.5cm}
+\begin{center}
+\includegraphics[width=6cm]{pics/copycutpaste.eps}
+\end{center}
+  
+\begin{itemize}
+
+\item What we don't want to do:
+
+\begin{itemize}
+  
+\item Prompting LLM on a web interface 
+
+\item Then copy/pasting code into file
+
+\end{itemize}
+
+\item We use a more sophisticated environment
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Overview}
+
+\vspace*{.5cm}
+\begin{center}
+\includegraphics[height=6cm]{pics/overview.eps}
+\end{center}
+  
+\end{slide}
+
+
+
+\begin{slide}{OpenCode}
 
 \begin{itemize}
 
-\item 
+\item OpenCode is an open-source coding tool
+
+\item Connects LLMs to development tools
+
+\item Model-agnostic: can interact with (almost) every model you want
+
+\item By default, code is created and stored locally
+
+\end{itemize}
+
+\vspace*{.5cm}
+\begin{center}
+\includegraphics[width=7cm]{pics/opencode.eps}
+\end{center}
+
+
+\end{slide}
+
+
+
+\begin{slide}{Interaction with Files}
+
+\begin{itemize}
+
+\item OpenCode is not an editor:
+
+\begin{itemize}
+
+\item You can use any editor you want (VS Code, Emacs, IntelliJ) to look at
+  the files
+
+\item OpenCode executes commands in a terminal
+
+\end{itemize}
+
+\item With these commands it can manipulate files and use other tools
+
+\begin{itemize}
+
+\item This has direct implications for security
+
+\end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Repositories}
+
+\begin{itemize}
+
+\item A repository is where a version control system (VCS) stores its data
+
+\item A VCS tracks and manages changes to files
+
+\begin{itemize}
+
+\item Heavily used in managing source code
+
+\end{itemize}
+
+\item Allows to revert to a previous state
+
+\item Facilitates collaboration 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Model Context Protocol (MCP)}
+
+\begin{itemize}
+
+\item We just mention it for sake of completeness
+
+\item It is an open standard specifying how LLMs share data with external
+  tools
+
+\item MCP offers a standardized interface for
+
+  \begin{itemize}
+
+  \item reading files
+
+  \item executing functions
+
+  \item handling prompts
+
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Summary}
+
+\begin{itemize}
+
+\item This chapter is kept short on purpose
+
+\item We show how to set up and use this environment in hands-on exercises
+
+\end{itemize}
+
+\vspace*{.5cm}
+\begin{center}
+\includegraphics[width=9cm]{pics/theoryvspractice.eps}
+\end{center}
+
+\end{slide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 3}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+A Mental Model of LLMs and Agentic Coding
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+\begin{slide}{Introduction}
+
+\begin{itemize}
+
+\item The aim is not to give a detailed technical description of LLMs (and the
+  agents utilizing them)
+
+\begin{itemize}
+
+\item You don't need to build an LLM or agent,
+
+\item but to understand how they react to your input
+
+\end{itemize}
+
+\item In a nutshell, an LLM is autocomplete on steroids
+
+\begin{itemize}
+
+\item It doesn't look up an answer
+
+\item It generates its response incrementally, depending on the context and
+  the data it was trained on
+
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Autocomplete vs. LLM}
+
+\begin{itemize}
+
+\item If you type a message on your phone, it tries to predict how the message
+  continues
+
+\begin{itemize}
+  
+\item Uses a dictionary and probabilities for continuations
+
+\end{itemize}
+  
+\item An LLM works at a different scale
+
+\begin{itemize}
+
+\item Instead of a dictionary, uses a neural network with billions or
+  trillions of parameters
+
+  \begin{itemize}
+
+    \item Not just larger, also tries to generalize
+    
+  \end{itemize}
+  
+\item Utilizes a much larger context (thousands of words)
+
+\item Depending on the setting, it may not always return the most probable answer
+  
+\end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Tokens}
+
+\begin{itemize}
+
+\item An LLM doesn't work with words, uses tokens instead
+
+\item We only give a brief introduction to tokens
+
+\item What do tokens look like?
+  
+\begin{itemize}
+
+\item (Short) words, e.g. \textit{house}
+
+\item Parts of words, e.g. \textit{un con stitu tion al}
+
+\item Punctuation, whitespace, emojis
+  
+\end{itemize}
+
+\item Tokens are used
+
+\begin{itemize}
+  
+\item to avoid vocabulary explosion
+\item identify new words
+\item describe concepts independent of language
+
+\end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Generating an Answer}
+
+\begin{itemize}
+
+\item Context: current prompt and previous input/output
+
+\item An LLM then generates a plausible continuation: \\
+context $\rightarrow$ next token $\rightarrow$ next token $\rightarrow$ next token
+
+\item A generated token is added to the context
+
+\item The \emph{context window} plays a crucial role
+  
+\end{itemize}
+
+\vspace*{-.3cm}
+\begin{center}
+\includegraphics[height=4.5cm]{pics/contextwindowparadox.eps}
+\end{center}
+
+
+\end{slide}
+
+
+
+
+\begin{slide}{Context Window}
+
+\begin{itemize}
+
+\item Process is driven by the content of the context window
+
+  \begin{itemize}
+  
+  \item This window is not infinitely large
+    
+  \item Higher recall at edges (beginning/end)
+
+\end{itemize}
+  
+\item Some similarity to our brain's working memory
+
+  \begin{itemize}
+
+  \item Can hold seven chunks of information (+/-2)
+
+  \item Serial position effect (easier to remember start/end)
+    
+  \end{itemize}
+
+\end{itemize}
+
+\vspace*{.5cm}
+
+\begin{itemize}
+  
+\item Takeaway: if we want good results, we have to provide the right context
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{From Chatbot to Agent}
+
+\begin{itemize}
+
+\item We don't want to use the LLM in the following way: \\
+  prompt $\rightarrow$ answer
+
+\item First of all, there's an issue with reliability
+
+  \begin{itemize}
+
+  \item LLMs can be confidently incorrect
+  
+  \end{itemize}
+
+\item Given a prompt (and all their learned patterns), an LLM gives plausible
+  answers
+
+  \begin{itemize}
+
+  \item LLMs do not know what the outside world looks like
+  
+  \end{itemize}
+
+\item We want evidence for correctness
+
+  \begin{itemize}
+
+  \item Idea: give LLMs access to tools for checking
+  
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{From Chatbot to Agent (2)}
+
+\begin{itemize}
+
+\item We want to follow a loop:
+
+\vspace*{-.1cm}
+\begin{center}
+\includegraphics[height=6cm]{pics/loop.eps}
+\end{center}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{From Chatbot to Agent (3)}
+
+\begin{itemize}
+
+\item In the context of coding, we provide tools such as
+
+  \begin{itemize}
+    
+  \item Requirement/specification documents
+    
+  \item Code files
+    
+  \item Tests
+    
+  \item Current repository and history
+    
+  \item External documentation
+    
+  \end{itemize}
+
+\item In agentic coding, the LLM itself is not the agent
+
+  \begin{itemize}
+
+  \item The agent is the system driving the above loop and using the LLM
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Summary}
+
+\begin{itemize}
+
+\item We covered a basic mental model of LLMs and agents
+
+\item Helps you in answering questions like:
+
+  \begin{itemize}
+
+  \item Why did the LLM/agent just do this?
+
+  \item How can I make it behave differently?
+
+  \end{itemize}
+
+\item We briefly explained how LLMs/agents interact with the outside world
+  
+\end{itemize}
+  
+\end{slide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 4}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+From Problem to Specification
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+\begin{slide}{Introduction}
+
+\vspace*{-.5cm}
+\begin{center}
+\includegraphics[height=3.7cm]{pics/baizhiweimindreadingfairy.eps}
+\end{center}
+\vspace*{-.3cm}
+
+
+\begin{itemize}
+
+\item LLMs/agents don't magically know what you mean
+
+\item An agent can only implement
+
+\begin{itemize}
+
+\item what you have specified
+
+\item or what it can safely infer
+
+\end{itemize}
+
+\item If your specification has gaps, the agent will fill them
+
+\item Results can range from \textit{hilarious} to \textit{dangerous}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{A Cautionary Tale}
+
+\begin{itemize}
+
+\item Assume you want to analyze some experimental data
+
+\item You enter the following as a prompt: \\
+  ``Write a program that analyzes experimental data.''
+
+\item What do you expect the agent to produce?
+
+\vspace*{.2cm}
+\begin{center}
+\includegraphics[height=4.4cm]{pics/messycode.eps}
+\end{center}
+  
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{A Cautionary Tale (2)}
+
+\begin{itemize}
+
+\item To generate sensible code, an agent needs to know:
+
+  \begin{itemize}
+    
+  \item What kind of experiment?
+
+  \item What do we mean by ``analyze''?
+
+  \item Which questions do we want answered?
+    
+  \item What does the data look like?
+
+  \item What output do we want?
+
+  \item Who will use the result?
+
+  \item How do we check correctness?
+    
+  \end{itemize}
+
+\item We need to define a lot of different aspects
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Covering Different Aspects}
+
+\begin{itemize}
+
+\item \textbf{Problem}: what is the general goal?
+
+\item \textbf{Requirements}: what should the program do?
+
+\item \textbf{Specification}: how should it do it?
+
+\item \textbf{Constraints}: what must/mustn't it do?
+
+\item \textbf{Acceptance criteria}: how do we check it's correct?
+
+\item \textbf{Examples}: what do concrete use cases look like?
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Back to Our Example}
+
+\begin{itemize}
+
+\item Problem
+  
+\begin{itemize}
+
+\item Analyze my experimental data
+
+\end{itemize}
+
+\item Requirements
+  
+\begin{itemize}
+
+\item Load CSV files
+\item Calculate summary statistics
+\item Identify outliers
+\item Produce result file and plots
+
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Back to Our Example (2)}
+
+\begin{itemize}
+
+\item Specification
+
+\begin{itemize}
+
+\item For each CSV file
+  
+\begin{itemize}
+
+\item group measurements by experimental condition
+\item compute mean, median and standard deviation
+\item identify observations more than 3 standard deviations from the group mean
+\item \dots
+
+\end{itemize}
+
+\end{itemize}
+
+\item Constraints
+
+\begin{itemize}
+
+\item For the plots, use matplotlib
+\item Don't use Python versions older than 3.14
+\item Don't modify the original data files
+
+\end{itemize}
+
+\end{itemize}
+
+
+\end{slide}
+
+
+
+
+\begin{slide}{Back to Our Example (3)}
+
+\begin{itemize}
+
+\item Acceptance criteria
+  
+\begin{itemize}
+
+\item A handcrafted example (with known output) produces the same output
+\item \texttt{results.csv} has to pass some statistical tests
+
+
+\end{itemize}
+
+\item Examples
+  
+\begin{itemize}
+
+\item Provide typical snippets of experimental data
+\item Also include some edge cases
+  
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Resolving Ambiguities}
+
+\begin{itemize}
+
+\item What happens if we don't provide this information?
+
+\item LLMs always give an answer
+
+\item They resolve ambiguities by filling in the gaps
+
+  \begin{itemize}
+
+    \item Based on the most plausible options from training
+
+  \end{itemize}
+
+\item This does not usually get you what you want.
+  
+\end{itemize}
+
+\vspace*{-.3cm}
+\begin{center}
+\includegraphics[height=4.6cm]{pics/directionless.eps}
+\end{center}
+  
+
+\end{slide}
+
+
+
+
+\begin{slide}{Decomposition}
+
+\begin{itemize}
+
+\item Once the specification is done, ask the following: \\
+  Can this be broken down into smaller subtasks?
+
+\item For analyzing experimental data, this could look like
+
+\begin{itemize}
+
+\item Load data (specifying input format + validation)
+
+\item Group observations
+
+\item Calculate statistics
+
+\item Detect outliers
+
+\item Write results
+
+\item Generate plots
+
+\item Decide whether to accept analysis
+
+\end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Decomposition (2)}
+
+\begin{itemize}
+
+\item Gives you checkpoints
+
+  \begin{itemize}
+    
+  \item Instead of producing thousands of lines of code,
+
+  \item implements and verifies one part at a time
+    
+  \end{itemize}
+
+\item Also helps with resolving ambiguities
+
+\begin{itemize}
+
+\item Can now also be done for one part at a time
+
+\end{itemize}
+
+\item We talk more about decomposition in the next chapter
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Mapping to Agentic Loop}
+
+\begin{itemize}
+
+\item Maps nicely onto the loop from the previous chapter:
+
+\begin{itemize}
+
+\item Perceive Goal -- Problem
+
+\item Plan Steps -- Specification
+
+\item Act -- Implement
+
+\item Observe Results -- Check Acceptance Criteria
+
+\end{itemize}
+
+\item If it isn't working, refine specification
+
+\end{itemize}
+
+\vspace*{-.1cm}
+\begin{center}
+\includegraphics[height=3.6cm]{pics/loop.eps}
+\end{center}
+
+\end{slide}
+
+
+
+
+\begin{slide}{Summary}
+
+\begin{itemize}
+
+\item Agentic coding is not about finding the ``magic'' prompt
+
+\item It's about (systematically) getting rid of ambiguities
+
+  \begin{itemize}
+    
+  \item If we don't, an LLM will fill gaps on its own
+    
+  \end{itemize}
+  
+\item So, if things don't work
+
+  \begin{itemize}
+    
+  \item Don't ask an agent to fix the code
+
+  \item Instead, go over the specification
+    
+  \end{itemize}
+  
+\end{itemize}
+
+\vspace*{.2cm}
+
+\begin{scriptsize}
+\begin{quote}
+\emph{``On two occasions I have been asked, – `Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?' ... I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.''}
+\end{quote}
+\hfill Charles Babbage
+\end{scriptsize}
+
+
+
+\end{slide}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 5}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+Structuring the Code
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+
+
+\begin{slide}{Motivation}
+
+\begin{itemize}
+
+\item We could throw all the code into one big file
+
+\item For instance, by prompting
+
+  \begin{itemize}
+    
+  \item Write a program that reads data from CSV-files, cleans it, computes
+    statistics, detects outliers, \dots
+
+  \item Implement the above specification
+    
+  \end{itemize}
+  
+\item An LLM would happily create a single program containing hundreds of
+  lines of code
+
+\item Program may work correctly but why is this a bad idea?
+  
+\end{itemize}
+
+
+\end{slide}
+
+
+
+
+\begin{slide}{Motivation (2)}
+
+
+\vspace*{-.3cm}
+\begin{center}
+\includegraphics[height=3.5cm]{pics/spaghetticode.eps}
+\end{center}
+\vspace*{-.3cm}
+
+
+\begin{itemize}
+
+\item Code like this is hard to follow and maintain
+
+\item This is the case not just for humans
+
+\item An LLM will also have problems
+  
+\begin{itemize}
+  
+\item The size of the context window is limited
+
+\item If the program becomes too large, it will not fit
+
+\item So, an LLM may be missing important information
+  
+\end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Decomposition}
+
+\begin{itemize}
+
+\item Specification says what and how things are done
+
+\item Decomposition breaks functionality into pieces and sets up boundaries
+  between them
+
+  \begin{itemize}
+    
+  \item Determines what is done where
+
+  \item Defines how pieces interact
+    
+  \end{itemize}
+
+\end{itemize}
+
+\vspace*{-.3cm}
+\begin{center}
+  \includegraphics[height=4.5cm]{pics/architecture.eps}
+\end{center}
+\vspace*{-.3cm}
+
+
+
+\end{slide}
+
+
+
+
+\begin{slide}{Architecture vs. Design}
+
+\begin{itemize}
+
+\item Software developers use different terminology when it comes to
+  structuring code
+
+  \begin{itemize}
+    
+  \item Architecture: high-level view of a system's structure
+    
+  \item Design: more concerned with individual components
+    
+  \end{itemize}
+
+\item There is no strict boundary between the two
+
+\item We're not going into details here
+
+  \begin{itemize}
+    
+  \item Important for you: you need to structure the code
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Modules}
+
+\begin{itemize}
+
+\item In Python, modules structure your code
+
+\item A module is simply a file containing Python code
+
+\item E.g., we could introduce the following structure:
+  
+\end{itemize}
+
+\vspace*{-.3cm}
+\begin{scriptsize}
+\dirtree{%
+.1 project/.
+.2 data/.
+.3 \mbox{loader.py}.
+.3 \mbox{cleaning.py}.
+.2 analysis/.
+.3 \mbox{statistics.py}.
+.3 \mbox{outliers.py}.
+.2 reporting/.
+.3 \mbox{results.py}.
+.2 visualization/.
+.3 \mbox{plot.py}.
+.2 \mbox{main.py}.
+}
+\end{scriptsize}
+
+\end{slide}
+
+
+
+
+\begin{slide}{Modules (2)}
+
+\begin{itemize}
+
+\item It's not about how many files there should be
+  
+\item In software development, modules are about
+
+  \begin{itemize}
+
+  \item responsibilities
+
+  \item interfaces
+
+  \item dependencies
+    
+  \end{itemize}
+
+\item In agentic coding, they also set boundaries
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Responsibilities}
+
+\begin{itemize}
+
+\item Ideally, a module should perform one specific task
+
+\item Questions to ask yourself are:
+
+  \begin{itemize}
+  
+  \item Does every module have a clear purpose?
+
+  \item Are any modules doing too many unrelated things?
+
+  \item Are there unnecessary modules?
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Interfaces}
+
+\begin{itemize}
+
+\item The interface defines how the outside world interacts with a module
+
+\item Should not reveal internal implementation details
+
+\item States which services a module provides
+
+\item Questions to ask yourself are:
+
+  \begin{itemize}
+  
+  \item What does each module expose?
+
+  \item Are the interfaces simple?
+
+  \item How much do modules need to know about each other?
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Dependencies}
+
+\begin{itemize}
+
+\item A module $A$ depends on module $B$ if it relies on the functionality of $B$ to
+  work correctly
+
+\item There is also indirect, transitive dependency
+
+\item High dependency makes code hard to change or test independently
+
+  \begin{itemize}
+  
+  \item Which modules depend on which other modules?
+
+  \item Are there circular dependencies?
+
+  \item Could a change in one modules unnecessarily affect many others?
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+\begin{slide}{Agent Boundaries}
+
+\begin{itemize}
+
+\item Code structure defines the working environment
+
+\item An agent is able to work locally:
+
+  \begin{itemize}
+    
+  \item A module's implementation can be changed without affecting the
+    environment outside
+
+  \item A good interface tells an agent what it may rely on without looking at
+    the inner workings
+    
+  \end{itemize}
+  
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+
+\begin{slide}{Agent Boundaries (2)}
+
+\begin{itemize}
+
+\item This has an impact on
+
+  \begin{itemize}
+    
+  \item where an agent searches for making changes
+
+  \item what the agent changes
+
+  \item how much unrelated code it can affect
+
+  \item how easily changes can be reviewed
+    
+  \end{itemize}
+
+\item You can explicitly tell an agent to make changes to only one module (or
+  few modules)
+
+\item Ultimately, this lowers the amount of information needed in the context window
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Agent Boundaries (3)}
+
+\begin{itemize}
+
+\item Questions to ask yourself are:
+
+  \begin{itemize}
+  
+  \item If an agent is told to modify functionality, which file should it look
+    at (and is this obvious)?
+      
+  \item Can it make the change without modifying a number of other modules?
+
+  \item May an agent accidentally cross boundaries?
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Summary}
+
+\begin{itemize}
+
+\item Don't let the agent turn a specification directly into a pile of code.
+
+\item First, decide how to divide the problem into components and decide where
+  the boundaries are
+
+\item Then let the agent implement within these boundaries
+
+\item You can let the agent propose a code structure, but you should not
+  delegate all decisions to it
+
+\begin{itemize}
+
+\item For larger projects, agents have a tendency to create too many modules
+
+\end{itemize}
+  
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 6}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+Implementation
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+
+
+\begin{slide}{From Design to Implementation}
+
+\begin{itemize}
+
+\item So far, we have problem $\rightarrow$ specification $\rightarrow$ structuring
+
+\item However, the structure is not an implementation plan
+
+  \begin{itemize}
+
+  \item Don't just tell the agent: now build all this
+    
+  \end{itemize}
+
+\item Manage the agent via an implementation loop
+  
+\end{itemize}
+
+\vspace*{.2cm}
+\begin{center}
+  \includegraphics[width=9cm]{pics/imploop.eps}
+\end{center}
+\vspace*{.2cm}
+
+\begin{itemize}
+  
+\item Again, very similar to agentic loop
+  
+\end{itemize}
+
+\end{slide}
+
+
+
+\begin{slide}{Subtasks}
+
+\begin{itemize}
+
+\item Divide implementation into (independent) subtasks
+
+\item Structure should help in this; if it doesn't, you may want to
+  reconsider the structure
+  
+\item Ideally, we have the following:
+
+  \begin{itemize}
+    
+  \item The goal is clear
+
+  \item The relevant requirements are known
+    
+  \item The scope is bounded
+
+  \item There is a clear completion criterion that can be inspected and tested
+    
+  \end{itemize}
+
+\item This is closely related to the specification
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+
+\begin{slide}{Example}
+
+\begin{itemize}
+
+\item Implementing the data loader is a good subtask
+
+  \begin{itemize}
+    
+  \item Goal: load CSV file from disk into memory 
+
+  \item Requirements: file name and format of input file, we also need
+    to know format in main memory
+
+  \item Scope: all we do is load data from disk to memory
+
+  \item Correctness: all data has been correctly loaded
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Planning}
+
+\begin{itemize}
+
+\item LLMs seem to be eager to generate code
+
+\item Tell it not to implement the code yet, but to do some planning first
+
+  \begin{itemize}
+    
+  \item Many agents have a read-only plan mode (\texttt{/plan})
+    
+  \end{itemize}
+
+\item In the planning phase, ask the agent to
+
+  \begin{itemize}
+    
+  \item inspect the relevant code (if there's already code)
+
+  \item explain the proposed approach
+
+  \item identify files that are changed
+
+  \item point out any ambiguities
+
+  \item generate tests to check correctness
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Implementation}
+
+\begin{itemize}
+
+\item Once you're happy with the plan, then you can tell the agent to implement
+
+\item This step does not need any interaction
+
+\item However, you can still follow the output as the agent generates the code
+
+\item You may catch something that looks strange
 
 \end{itemize}
   
@@ -387,6 +1822,43 @@ Introduction
 \end{itemize}
   
 \end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
 
 
 
