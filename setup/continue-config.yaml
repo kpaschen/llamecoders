@@ -1,0 +1,34 @@
+name: Local Agent
+version: 1.0.0
+schema: v1
+models:
+  - name: gpt-4o
+    provider: openai
+    model: gpt-4o
+    apiBase: https://llamas.nephometrics.com
+    apiKey: your key goes here
+    roles:  
+      - chat  
+      - edit  
+      - autocomplete  
+      - apply  
+      - summarize
+  - name: infomaniak-kimi
+    provider: openai
+    model: infomaniak-kimi
+    apiBase: https://llamas.nephometrics.com
+    apiKey: your key goes here
+    roles:
+    - edit
+    - summarize
+    - chat
+    - autocomplete
+    - apply
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase
