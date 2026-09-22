@@ -1631,6 +1631,164 @@ Implementation
 
 
 
+\begin{slide}{From Design to Implementation}
+
+\begin{itemize}
+
+\item So far, we have problem $\rightarrow$ specification $\rightarrow$ structuring
+
+\item However, the structure is not an implementation plan
+
+  \begin{itemize}
+
+  \item Don't just tell the agent: now build all this
+    
+  \end{itemize}
+
+\item Manage the agent via an implementation loop
+  
+\end{itemize}
+
+\vspace*{.2cm}
+\begin{center}
+  \includegraphics[width=9cm]{pics/imploop.eps}
+\end{center}
+\vspace*{.2cm}
+
+\begin{itemize}
+  
+\item Again, very similar to agentic loop
+  
+\end{itemize}
+
+\end{slide}
+
+
+
+\begin{slide}{Subtasks}
+
+\begin{itemize}
+
+\item Divide implementation into (independent) subtasks
+
+\item Structure should help in this; if it doesn't, you may want to
+  reconsider the structure
+  
+\item Ideally, we have the following:
+
+  \begin{itemize}
+    
+  \item The goal is clear
+
+  \item The relevant requirements are known
+    
+  \item The scope is bounded
+
+  \item There is a clear completion criterion that can be inspected and tested
+    
+  \end{itemize}
+
+\item This is closely related to the specification
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+
+
+\begin{slide}{Example}
+
+\begin{itemize}
+
+\item Implementing the data loader is a good subtask
+
+  \begin{itemize}
+    
+  \item Goal: load CSV file from disk into memory 
+
+  \item Requirements: file name and format of input file, we also need
+    to know format in main memory
+
+  \item Scope: all we do is load data from disk to memory
+
+  \item Correctness: all data has been correctly loaded
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Planning}
+
+\begin{itemize}
+
+\item LLMs seem to be eager to generate code
+
+\item Tell it not to implement the code yet, but to do some planning first
+
+  \begin{itemize}
+    
+  \item Many agents have a read-only plan mode (\texttt{/plan})
+    
+  \end{itemize}
+
+\item In the planning phase, ask the agent to
+
+  \begin{itemize}
+    
+  \item inspect the relevant code (if there's already code)
+
+  \item explain the proposed approach
+
+  \item identify files that are changed
+
+  \item point out any ambiguities
+
+  \item generate tests to check correctness
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Implementation}
+
+\begin{itemize}
+
+\item Once you're happy with the plan, then you can tell the agent to implement
+
+\item This step does not need any interaction
+
+\item However, you can still follow the output as the agent generates the code
+
+\item You may catch something that looks strange
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+
 \begin{slide}{}
 
 \begin{itemize}
