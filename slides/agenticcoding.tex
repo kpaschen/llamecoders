@@ -1,7 +1,8 @@
 
 \RequirePackage{xcolor}
 \documentclass[
-%pdf,
+ps,
+pdf
 %nocolorBG,
 %colorBG,
 %slideColor,
@@ -1777,11 +1778,287 @@ Implementation
 
 
 
-\begin{slide}{}
+\begin{slide}{Inspecting Changes}
 
 \begin{itemize}
 
-\item 
+\item Don't trust the explanations of the agent
+
+\item You should run some tests on the code
+
+  \begin{itemize}
+    
+  \item Tests should be written/generated before the code
+
+  \item As this is an important topic, we provide more details in the
+    following chapter
+    
+  \end{itemize}
+  
+\item Depending on the outcome, you do different things
+
+\end{itemize}
+
+\vspace*{.2cm}
+\begin{center}
+  \includegraphics[width=9cm]{pics/dilberttesting.eps}
+\end{center}
+\vspace*{.2cm}
+
+\end{slide}
+
+
+
+\begin{slide}{Failing Tests}
+
+\begin{itemize}
+
+\item You need to diagnose the failure
+
+  \begin{itemize}
+    
+  \item You can ask the agent to help you
+
+    \begin{itemize}
+      
+    \item Provide details of the test outcome
+
+    \item Ask it determine why it happened
+      
+    \end{itemize}
+    
+  \item You can also look at the code changes
+
+    \begin{itemize}
+      
+    \item Request explanations from the agent
+
+    \end{itemize}
+    
+  \end{itemize}
+
+\item Tell the agent to fix the code
+
+  \begin{itemize}
+    
+  \item It should not change the tests
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Succeeding Tests}
+
+\begin{itemize}
+
+\item Even if all tests succeed, it may still be a good idea to look at the
+  code yourself
+
+\item First, you have to find the changes
+
+  \begin{itemize}
+    
+  \item Git has the command \texttt{diff} to show all changes
+    
+  \item You can also ask the agent to point them out
+    
+  \end{itemize}
+
+\item Then review them yourself
+
+\item Check if important corner cases are missing
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Reviewing Code}
+
+\begin{itemize}
+
+\item For example, \texttt{diff} returns the following snippet
+
+\begin{verbatim}
+calculate_average(values):
+     return sum(values) / len(values)
+\end{verbatim}
+  
+\item Looks reasonable
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Reviewing Code}
+
+\begin{itemize}
+
+\item For example, \texttt{diff} returns the following snippet
+
+\begin{verbatim}
+calculate_average(values):
+     return sum(values) / len(values)
+\end{verbatim}
+  
+\item Looks reasonable
+
+\item What happens if \texttt{values} is empty?
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Context Management}
+
+\begin{itemize}
+
+\item We mentioned that an agent's context memory is limited
+
+  \begin{itemize}
+
+    \item Every irrelevant piece of information creates noise
+    
+  \end{itemize}
+    
+\item Implementing code, an agent has to consider a lot:
+
+  \begin{itemize}
+    
+  \item Specification
+
+  \item Source code and its structure
+
+  \item Tests
+
+  \item Documentation
+    
+  \item Previous conversations
+
+  \item Tool output
+
+  \item Error messages
+    
+  \end{itemize}
+
+\item Not all of this should be included in every interaction
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Context Management (2)}
+
+\begin{itemize}
+
+\item Provide the context needed for the current decisions
+
+  \begin{itemize}
+    
+  \item Current subtask
+
+  \item Relevant parts of the specification
+
+  \item Relevant code files
+
+  \item Relevant acceptance criteria
+    
+  \end{itemize}
+
+\end{itemize}
+
+%\vspace*{.1cm}
+\begin{center}
+  \includegraphics[height=4cm]{pics/contextwindowclutter2.eps}
+\end{center}
+\vspace*{.2cm}
+
+% context engineering
+
+\end{slide}
+
+
+
+\begin{slide}{When the Agent Gets Stuck}
+
+\begin{itemize}
+
+\item You might go through the implementation loop several times unsuccessfully
+
+\item If this happens, it's time to revisit certain aspects
+
+  \begin{itemize}
+    
+  \item Was the subtask too large?
+
+  \item Did you review the code thoroughly enough?
+
+  \item Are the tests wrong?
+
+  \item Did the agent misunderstand the structure?
+
+  \item Is the specification too ambiguous?
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Code Repositories}
+
+\begin{itemize}
+
+\item Code repositories, such as Git, store development snapshots you can go
+  back to
+
+\item For the moment, we recommend not to give an agent direct access to the
+  repository
+
+  \begin{itemize}
+  
+  \item Keep control by manually committing code
+
+  \end{itemize}
+
+\item Commit working states that are meaningful, i.e., you have successfully
+  completed an intermediate step
+
+\item If an agent messes up, you can go back to that state
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Summary}
+
+\begin{itemize}
+
+\item Generating code is only a part of the workflow
+
+\item Also involves determining subtasks, planning, verification, reviewing, and
+  debugging
+
+\item Usually, you have to go through several iterations
+  
+\item An agent isn't replacing the development process
+
+\item It is accelerating it
 
 \end{itemize}
   
@@ -1858,8 +2135,6 @@ Implementation
 \end{itemize}
   
 \end{slide}
-
-
 
 
 
