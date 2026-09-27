@@ -2077,6 +2077,189 @@ calculate_average(values):
 \end{slide}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 7}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+Test-Driven Development
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+\begin{slide}{Testing}
+
+\begin{quote}
+\emph{``Beware of bugs in the above code; I have only proved it correct, not tested it.''}
+\end{quote}
+\hfill Donald Knuth % https://cs.stanford.edu/~knuth/faq.html)
+
+Testing is how we make sure our code does what we intended.
+
+For the purposes of this class, we will focus on \textit{unit testing} (https://en.wikipedia.org/wiki/Unit_testing), the    
+basic and most important building block of most testing strategies. 
+
+\end{slide}
+
+\begin{slide}{Example Test}
+
+A unit test verifies the correct operation of a small piece of code, often a single function.
+
+\begin{verbatim}
+ import pytest  # Import the module that provides Python's unit testing framework                                    
+ from addressverifier import AddressVerifier # Import the module and class that we want to test                      
+                                                                                                                      
+ def testValidSwissAddress():                                                                                        
+     # Call the address verifier with an address that should pass verification.                                      
+     result = AddressVerifier().verify(                                                                              
+         street="Rämistrasse 71",                                                                                    
+         city="Zürich",                                                                                              
+         canton="ZH",                                                                                                
+         postalCode="8006",                                                                                          
+         country="CH",                                                                                               
+     )                                                                                                               
+     assert result.isValid   # "assert" makes the test fail when the statement is false                              
+     assert result.errors == [] 
+\end{verbatim}
+
+\end{slide}
+
+\begin{slide}{Another Test}
+
+Code that accepts all addresses as valid would pass the test on the previous slide.
+
+We can add a test for an address that should not pass validation:
+
+\begin{verbatim}
+import pytest  # Import the module that provides Python's unit testing framework                                        
+from addressverifier import AddressVerifier # Import the module and class that we want to test                          
+                                                                                                                        
+def testInValidSwissAddress():                                                                                          
+    # Call the address verifier with an address that should fail verification.                                          
+    result = AddressVerifier().verify(                                                                                  
+        street="Rämistrasse 71",                                                                                        
+        city="Zürich",                                                                                                  
+        canton="HH",  
+        postalCode="80060", 
+        country="CH",                                                                                                   
+    )                                                                                                                   
+    assert not result.isValid   # "assert" makes the test fail when the statement is false                              
+    assert len(result.errors) == 2 # Expect to find two errors                                                          
+    assert "NoSuchCanton" in result.errors  # Expect verification to fail on nonexistent canton.
+    assert "BadPostCode" in result.errors # Expect verification to fail on invalid postcode.
+\end{verbatim}
+
+\end{slide}
+
+\begin{slide}{Test-driven development (TDD)}
+
+Writing the tests first can be useful because it makes you think about how your interface will be called:
+
+\begin{itemize}
+\item what data will a caller provide?
+\item which return values will make sense to them?
+\item which error codes will be useful?
+\end{itemize}
+
+Encourages you to test your \textit{interface} rather than your \textit{implementation}.
+
+\end{slide}
+
+\begin{slide}{TDD Process}
+
+\begin{itemize}
+\item Work on one feature at a time. A feature can be an interface method, or even one behaviour of an interface method. For example,
+"Postcodes can be specified as XXXX or CH-XXXX".
+\item Write tests for that one feature.
+\item Run the tests and verify that they fail.
+\item Fix the code until all the tests pass.
+\end{itemize}
+
+Reviewing tests is easier than reviewing code!
+You can ask the coding agent to write the tests first. You review the tests, and only then let the agent modify the code.
+
+
+\end{slide}
+
+\begin{slide}{Test coverage}
+
+How much testing is enough?
+
+\textit{Test coverage} measures how many of your project's lines of code get executed by tests.
+
+Gives you a rough idea how much of your functionality is getting tested.
+
+Between $70%$ and $80%$ line coverage is a good goal; higher coverage has diminishing returns.
+
+Ask the coding agent to check and maintain test coverage. This is included in our sample \textit{AGENTS.md} file.
+
+\end{slide}
+
+\begin{slide}{Good Tests}
+
+Good tests give you confidence:
+\begin{itemize}
+\item Run automatically
+\item Complete quickly
+\item Let you catch mistakes early
+\end{itemize}
+
+Good tests
+
+\begin{itemize}
+\item focus on a single feature
+\item test the \textit{interface}, not the \textit{implementation}
+\item run quickly and without external dependencies (in particular: no access to the internet or to production data stores)
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}{Bad Tests}
+
+Bad tests fail a lot and you end up fixing the tests rather than the code. This mainly happens for two reasons:
+
+\begin{itemize}
+\item \textit{brittle} tests are tied to the \textit{implementation} rather than the \textit{interface}, so they need to be changed even for small code changes.
+\item \textit{flaky} tests depend on behaviour or state outside of the scope of the system under test, such as an external data store. They 
+tend to be slow and fail randomly.
+\end{itemize}
+
+But what if you do need to test code that accesses a database? Mocks (https://pytest-mock.readthedocs.io/en/latest/) are your friend.
+
+\end{slide}
+
+\begin{slide}{Tests written by coding agents}
+
+Absent careful prompting or relevant \textit{skills}, LLMs often write tests that are both brittle and flaky.
+
+This is not a big problem for small, short projects, but it will become annoying if you want to keep using and extending the
+code.
+
+Put good testing practices into the context and review the tests to make sure they stay useful.
+
+\end{slide}
+
+\begin{slide}{Summary: TDD}
+
+Good tests are a recipe for useful software.
+
+They ensure that
+
+\begin{itemize}
+\item new code satisfies new requirements
+\item modifications to existing code don't break existing features
+\end{itemize}
+
+Tests are easiest to write when the software is well-structured with clear interfaces; in particular,
+if you find it difficult to test features of your software in small independent tests, this can
+point to a problem in your interface design.
+
+\end{slide}
 
 \begin{slide}{}
 
