@@ -178,9 +178,6 @@ Introduction
 
 \end{itemize}
 
-% In der Mitte braucht es noch ein Bild von Odysseus: 
-% https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Head_Odysseus_MAR_Sperlonga.jpg/250px-Head_Odysseus_MAR_Sperlonga.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail
-
 \vspace*{-.2cm}
 
 \begin{center}
@@ -2345,7 +2342,7 @@ def testInValidSwissAddress():
 
 
 
-\begin{slide}{External Dependendencies}
+\begin{slide}{External Dependencies}
 
 \begin{itemize}
   
@@ -2434,6 +2431,267 @@ def testInValidSwissAddress():
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 8}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+Debugging and Refactoring
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+
+\begin{slide}{Debugging}
+
+\begin{itemize}
+
+\item Eventually, your code will contain a bug
+
+  \begin{itemize}
+    
+  \item That means, it doesn't produce the expected output
+    
+  \end{itemize}
+
+\item Proper reaction is not just telling the agent: fix this
+
+\item It should be resolved in the following way:
+
+  \begin{itemize}
+    
+  \item Reproduce the failure reliably (what)
+
+  \item Then, investigate the cause (why)
+
+  \item Finally, fix the problem
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Example}
+
+\begin{itemize}
+
+\item Let's go back to the example for calculating averages
+
+\begin{verbatim}
+calculate_average(values):
+     return sum(values) / len(values)
+\end{verbatim}
+
+\item Your program just crashed, outputting
+
+\begin{verbatim}
+File "...", line x, in calculate_average
+ZeroDivisionError: division by zero
+\end{verbatim}
+  
+\item Give this error message to the agent and ask it
+
+  \begin{itemize}
+    
+  \item to investigate what is going on and
+
+  \item to hypothesize why it is happening
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Investigate}
+
+\begin{itemize}
+
+\item Have a look at the agent's answer
+
+  \begin{itemize}
+    
+  \item Does it explain what is happening?
+    
+  \end{itemize}
+
+\item Clearly, a division by zero triggers the error
+
+  \begin{itemize}
+    
+  \item But why is \texttt{values} empty?
+    
+  \end{itemize}
+
+\item Can this error be reproduced with other inputs?
+
+  \begin{itemize}
+    
+  \item This further evaluation can be supported by the agent again
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Example}
+
+\begin{itemize}
+
+\item The agent may come back with the following answer
+
+  \begin{itemize}
+    
+  \item The input file did not pass the validation
+
+  \item This resulted in \texttt{values} not being properly initialized
+    
+  \end{itemize}
+
+\item This can be tested by using corrupt input files that cannot be validated
+  
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Preparing Modification}
+
+\begin{itemize}
+
+\item Once you're happy with the diagnosis, you can ask the agent to prepare
+  the modification
+
+\item Review the modification
+
+\item If you're satisfied, ask the agent to modify the code
+
+\item Also test the code!
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{Testing}
+
+\begin{itemize}
+
+\item Ideally, the test for the modification is generated before the
+  modification itself
+
+  \begin{itemize}
+    
+  \item Clearly, it will fail without the fix
+
+  \item Goal is to make it pass
+    
+  \end{itemize}
+
+\item Also run the other tests to check that nothing else was broken
+
+  \begin{itemize}
+    
+  \item This is called \emph{regression testing}
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{Traditional vs Agentic Debugging}
+
+\begin{minipage}[t]{5.6cm}
+
+All done by developer:
+  
+%\vspace*{-1.8cm}
+\begin{itemize}
+
+\item Investigate
+
+\item Hypothesize
+
+\item Run experiment
+
+\item Evaluate
+
+\item Modify code
+
+\item Test
+  
+\end{itemize}
+
+\end{minipage}
+%
+\begin{minipage}[t]{5.6cm}
+
+\begin{itemize}
+
+\item Developer
+
+  \begin{itemize}
+    
+  \item Agent
+    
+  \end{itemize}
+
+\item Describe evidence
+
+  \begin{itemize}
+    
+  \item Investigate
+
+  \item Hypothesize
+    
+  \end{itemize}
+
+\item Evaluate
+
+  \begin{itemize}
+    
+  \item Run experiment
+
+  \item Propose modification
+    
+  \end{itemize}
+
+\item Review
+
+  \begin{itemize}
+    
+  \item Modify
+
+  \item Test
+    
+  \end{itemize}
+
+  
+
+\end{itemize}
+\end{minipage}
+
+   
+\end{slide}
+
 
 \begin{slide}{}
 
@@ -2446,6 +2704,16 @@ def testInValidSwissAddress():
 \end{slide}
 
 
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
 
 \begin{slide}{}
 
@@ -2458,6 +2726,16 @@ def testInValidSwissAddress():
 \end{slide}
 
 
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
 
 \begin{slide}{}
 
@@ -2470,7 +2748,6 @@ def testInValidSwissAddress():
 \end{slide}
 
 
-
 \begin{slide}{}
 
 \begin{itemize}
@@ -2480,7 +2757,6 @@ def testInValidSwissAddress():
 \end{itemize}
   
 \end{slide}
-
 
 
 \begin{slide}{}
