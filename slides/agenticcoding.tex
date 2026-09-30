@@ -2693,29 +2693,88 @@ All done by developer:
 \end{slide}
 
 
-\begin{slide}{}
+\begin{slide}{Refactoring}
 
 \begin{itemize}
 
-\item 
+\item There may be another reason to modify code
+
+  \begin{itemize}
+    
+  \item The code gives correct results
+
+  \item But it is messy, ugly, and hard to understand
+    
+  \end{itemize}
+
+\item What do we mean by this?
+
+  \begin{itemize}
+    
+  \item One large function doing all the work
+
+  \item Duplicated logic
+
+  \item Unclear and confusing naming
+
+  \item Deeply nested conditionals
+
+  \item Unrelated responsibilities in one module
+
+  \item Weak abstraction boundaries
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{Refactoring (2)}
+
+\begin{itemize}
+
+\item \emph{Refactoring} is about giving code a better structure
+  \textbf{without} changing its behavior
+
+  \begin{itemize}
+    
+  \item Debugging changes behavior and structure
+    
+  \end{itemize}
+  
+\item Testing is also very important when refactoring
+
+  \begin{itemize}
+    
+  \item Don't refactor code that isn't covered by tests
+    
+  \end{itemize}
+
+\item Typical workflow of refactoring
+  
+  \begin{itemize}
+    
+  \item Understand behavior
+
+  \item Run existing tests
+
+  \item Identify missing tests and add tests if necessary
+
+  \item Refactor
+
+  \item Run tests again
+
+  \item Evaluate
+    
+  \end{itemize}
 
 \end{itemize}
   
 \end{slide}
 
 
-\begin{slide}{}
-
-\begin{itemize}
-
-\item 
-
-\end{itemize}
-  
-\end{slide}
-
-
-\begin{slide}{}
+\begin{slide}{Agentic Refactoring}
 
 \begin{itemize}
 
