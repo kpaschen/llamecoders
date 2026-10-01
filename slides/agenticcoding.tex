@@ -2854,6 +2854,294 @@ All done by developer:
 \end{slide}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 9}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+Large and Long-Lived Projects
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+\begin{slide}{What Does This Mean?}
+
+\begin{itemize}
+
+\item Large projects:
+
+  \begin{itemize}
+    
+  \item Hundreds of thousands of files
+
+  \item Requirements span multiple modules
+
+  \item Agents must navigate selectively (cannot understand all at once)
+
+  \item Changes can have unexpected side effects; it is more difficult to
+    preserve functionality
+    
+  \end{itemize}
+  
+\item Long-lived projects:
+
+  \begin{itemize}
+    
+  \item Decisions and constraints accumulate over time (technical debt)
+
+  \item Changes need to coexist with established structures and code that is
+    yet to be written
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{What Changes?}
+
+\begin{itemize}
+
+\item This is less about writing code
+
+\item More about maintaining control over a complex project
+
+\item Agent makes changes to a system it only partially understands
+
+\item Well-structured code becomes even more important
+
+\end{itemize}
+
+% If an agent can write a complete application from scratch, why might it
+% struggle to add a single feature to an existing application?
+%
+% Possible answers include:
+%
+%    Hidden dependencies.
+%
+%    Implicit assumptions.
+%
+%    Compatibility requirements.
+%
+%    Existing bugs and technical debt.
+%
+%    Design decisions that are not documented.
+%
+%    Lack of global context.
+
+\end{slide}
+
+
+\begin{slide}{Context Windows Revisited}
+
+\begin{itemize}
+
+\item Context windows have a finite capacity
+
+\item For large projects, an agent only has a partial view
+
+  \begin{itemize}
+    
+  \item Can only inspect a subset of the whole code
+
+  \item Earlier conversation details are not available anymore
+
+  \item Summarizations can lose important details
+
+  \item An agent's information may be incomplete or outdated
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{What Do We Do?}
+
+\begin{itemize}
+
+\item Assume we want to make changes to a large codebase
+
+  \begin{itemize}
+    
+  \item Good news: to do a good job, an agent doesn't need to know everything
+
+  \item Bad news: it takes some effort to ensure it has (exactly) the
+    information it needs
+    
+  \end{itemize}
+
+\item An agent needs to discover where a change belongs
+
+  \begin{itemize}
+    
+  \item Needs to do this before implementing code
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{Finding Your Way Around}
+
+\begin{itemize}
+
+\item What are typical exploration/search tasks?
+
+  \begin{itemize}
+    
+  \item Understanding the code structure
+
+  \item Finding the entry points of an application
+
+  \item Locating relevant classes, functions, and modules
+
+  \item Tracing dependencies and call chains
+
+  \item Identifying tests associated with relevant code
+    
+  \end{itemize}
+
+\item You can delegate a lot to the agent
+
+  \begin{itemize}
+    
+  \item But you should stay in the loop
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{Example}
+
+\begin{itemize}
+
+\item Assume we want to add a CSV export option the existing report generation
+
+\item What does an agent need to explore?
+
+  \begin{itemize}
+    
+  \item Where are the reports generated?
+
+  \item How are reports represented internally?
+
+  \item How are existing formats implemented?
+
+  \item Through which interface does a user select the output format?
+
+  \item Which tests cover report generation and export?
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{}
+
+\begin{itemize}
+
+\item 
+
+\end{itemize}
+  
+\end{slide}
+
+
 \begin{slide}{}
 
 \begin{itemize}
