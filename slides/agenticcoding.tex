@@ -2778,29 +2778,76 @@ All done by developer:
 
 \begin{itemize}
 
-\item 
+\item Again, it's not enough to just say: refactor this
+
+\item Be specific in your instructions
+
+\item For example, you want to refactor the module \texttt{Parser}, then you
+  may want to give these instructions:
+
+  \begin{itemize}
+    
+  \item Refactor \texttt{Parser} to separate parsing from validation
+
+  \item Preserve the API and the observable behavior
+
+  \item Do not change the file format or error semantics
+
+  \item Run the tests after each significant change
+    
+  \end{itemize}
+
+\item Looks similar to specifications and constraints
+  
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{Agentic Refactoring (2)}
+
+\begin{itemize}
+
+\item After agent finishes refactoring, verify the results
+  
+  \begin{itemize}
+    
+  \item Run all available tests
+
+  \item Check the differences in the code
+
+  \item Manually check behavior of critical parts
+    
+  \end{itemize}
+    
+\item The effort you have to make depends on modifications
+
+  \begin{itemize}
+    
+  \item Less for a few variable name changes
+
+  \item More for a rewrite of a core component
+    
+  \end{itemize}
 
 \end{itemize}
   
 \end{slide}
 
 
-\begin{slide}{}
+\begin{slide}{Summary}
 
 \begin{itemize}
 
-\item 
+\item Debugging/refactoring follows similar workflow as agentic implementation
 
-\end{itemize}
-  
-\end{slide}
+  \begin{itemize}
+    
+  \item Do not let the agent do everything on its own
 
-
-\begin{slide}{}
-
-\begin{itemize}
-
-\item 
+  \item Embed the work into a feedback loop
+    
+  \end{itemize}
 
 \end{itemize}
   
