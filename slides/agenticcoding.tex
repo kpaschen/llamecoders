@@ -2966,6 +2966,68 @@ Large and Long-Lived Projects
 \end{slide}
 
 
+
+\begin{slide}{Reviewing Changes}
+
+\begin{itemize}
+
+\item This not just about the context window
+
+\item Large, multi-file changes are also difficult to review
+
+  \begin{itemize}
+    
+  \item More interaction between changes
+
+    \begin{itemize}
+      
+    \item Greater risk of unintended modifications
+      
+    \end{itemize}
+
+  \item Harder to identify sources of regression
+
+  \item Larger diffs are more difficult to inspect
+
+  \item More difficult recovery after things go wrong
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Scoping}
+
+\begin{itemize}
+
+\item Left on its own, an agent tends to make additional changes, such as
+
+  \begin{itemize}
+
+  \item Rename unrelated functions
+
+  \item Reformat entire files
+
+  \item Introduce unnecessary abstractions
+
+  \item Refactor surrounding code
+
+  \item Change test infrastructure
+    
+  \end{itemize}
+
+\item In order to keep control, we need to explicitly tell it about the scope
+  of the change 
+  
+\end{itemize}
+  
+\end{slide}
+
+
+    
 \begin{slide}{What Do We Do?}
 
 \begin{itemize}
@@ -2976,12 +3038,12 @@ Large and Long-Lived Projects
     
   \item Good news: to do a good job, an agent doesn't need to know everything
 
-  \item Bad news: it takes some effort to ensure it has (exactly) the
+  \item Bad news: it takes some effort to ensure it has and uses (exactly) the
     information it needs
     
   \end{itemize}
 
-\item An agent needs to discover where a change belongs
+\item First, agent needs to discover where a change belongs
 
   \begin{itemize}
     
@@ -3054,44 +3116,108 @@ Large and Long-Lived Projects
 \end{slide}
 
 
-\begin{slide}{}
+\begin{slide}{Example (2)}
 
 \begin{itemize}
 
-\item 
+\item After identifying what needs change and describing the task, we
+  can set additional constraints for the scope:
+
+  \begin{itemize}
+    
+  \item Only modify the report generation and its test
+
+  \item Re-use existing report generation utilities
+
+  \item Do not change the internal report representation
+
+  \item Do not modify function interfaces
+
+  \item Do not refactor unrelated report general code
+    
+  \end{itemize}
 
 \end{itemize}
   
 \end{slide}
 
 
-\begin{slide}{}
+\begin{slide}{Paperwork}
 
 \begin{itemize}
 
-\item 
+\item Project documentation is necessary to keep things maintainable
+
+\item We distinguish different types:
+
+  \begin{itemize}
+
+  \item Earlier, we already identified requirements, specifications, and constraints
+    
+  \item Instructions: how work should be performed
+
+  \item Documentation: how the system works
+
+  \item Tests: executable checks of expected behavior
+    
+  \end{itemize}
+
+\item Preserves information from earlier conversations
+
+\item Has two audiences: human developers and AI agents
 
 \end{itemize}
   
 \end{slide}
 
 
-\begin{slide}{}
+\begin{slide}{Typical Documentation Files}
 
 \begin{itemize}
 
-\item 
+\item Typically, we have documentation files, such as
 
+  \begin{itemize}
+    
+  \item \texttt{README.md}: what the project does, how to install and run it
+
+  \item \texttt{AGENTS.md}: instructions and conventions for AI coding agents
+
+  \item Architecture documents: major components, interfaces, and design decisions
+    
+  \item API documentation: contracts between components
+
+  \item Developer guides: testing, debugging, and contribution workflows
+    
+  \end{itemize}
+
+\item These files may also contain information on why certain decision were made
+  
 \end{itemize}
   
 \end{slide}
 
 
-\begin{slide}{}
+
+\begin{slide}{Documentation vs Prompts}
 
 \begin{itemize}
 
-\item 
+\item Project-level instructions are useful, as they do not need to be
+  repeated all the time
+
+\item However, they are no substitute for good task specifications (or
+  reviews)
+
+\item That leaves us with two questions:
+
+  \begin{itemize}
+    
+  \item What should be documented once for the entire project?
+
+  \item What information belongs in a task prompt?
+    
+  \end{itemize}
 
 \end{itemize}
   
