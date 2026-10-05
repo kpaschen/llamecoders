@@ -2227,6 +2227,15 @@ def testInValidSwissAddress():
   \item You review the tests, and only then let the agent modify the code
     
   \end{itemize}
+
+
+\vspace*{-.5cm}
+\begin{center}
+  \includegraphics[height=5.4cm]{pics/tdd.eps}
+\end{center}
+%\vspace*{.2cm}
+
+
   
 
 \end{slide}
@@ -2358,6 +2367,16 @@ def testInValidSwissAddress():
  \url{https://pytest-mock.readthedocs.io/en/latest/}
 
 \end{itemize}
+
+
+
+\vspace*{.1cm}
+\begin{center}
+  \includegraphics[height=4cm]{pics/mockorstub.eps}
+\end{center}
+%\vspace*{.2cm}
+
+
 
 \end{slide}
 
@@ -2566,7 +2585,16 @@ ZeroDivisionError: division by zero
 \item This can be tested by using corrupt input files that cannot be validated
   
 \end{itemize}
-  
+
+
+\vspace*{.1cm}
+\begin{center}
+  \includegraphics[height=4.3cm]{pics/validation.eps}
+\end{center}
+%\vspace*{.2cm}
+
+
+
 \end{slide}
 
 
@@ -2850,7 +2878,16 @@ All done by developer:
   \end{itemize}
 
 \end{itemize}
-  
+
+
+%\vspace*{.1cm}
+\begin{center}
+  \includegraphics[height=4.6cm]{pics/refactoring.eps}
+\end{center}
+%\vspace*{.2cm}
+
+
+
 \end{slide}
 
 
@@ -2920,6 +2957,17 @@ Large and Long-Lived Projects
 \item Well-structured code becomes even more important
 
 \end{itemize}
+
+
+
+\vspace*{-.2cm}
+\begin{center}
+  \includegraphics[height=4.4cm]{pics/complexproject.eps}
+\end{center}
+%\vspace*{.2cm}
+
+
+
 
 % If an agent can write a complete application from scratch, why might it
 % struggle to add a single feature to an existing application?
@@ -3261,36 +3309,81 @@ Large and Long-Lived Projects
 \end{slide}
 
 
-\begin{slide}{}
+\begin{slide}{Git as a Safety Net}
 
 \begin{itemize}
 
-\item 
+\item We are not discussing Git in detail here
+
+\item Rather, we show how to use it as a coordination mechanism
+
+\item Generally, there are two ways to utilize Git
+
+  \begin{itemize}
+    
+  \item Let the agent commit automatically
+
+  \item The developer reviews and commits the changes
+    
+  \end{itemize}
+
+\item We advise to do the latter
+
+  \begin{itemize}
+    
+  \item Offers clean checkpoints for recovery
+    
+  \end{itemize}
 
 \end{itemize}
   
 \end{slide}
 
 
-\begin{slide}{}
+\begin{slide}{Possible Workflow}
 
-\begin{itemize}
+\vspace*{-.4cm}
+\begin{center}
+  \includegraphics[height=7.6cm]{pics/gitloop.eps}
+\end{center}
+%\vspace*{.2cm}
 
-\item 
+  
+%\begin{itemize}
 
-\end{itemize}
+%\item 
+
+%\end{itemize}
   
 \end{slide}
 
 
-\begin{slide}{}
+\begin{slide}{Summary}
 
 \begin{itemize}
 
-\item 
+\item In a long-lived project, keeping control is challenging
 
-\end{itemize}
+\item Every changed needs to fit into a larger system
+
+\item The project should remain understandable, consistent, and recoverable
+  over time
   
+\item Project management is much wider than context management
+  
+\end{itemize}
+
+
+\vspace*{-.2cm}
+\begin{center}
+  \includegraphics[width=7.5cm]{pics/git1.eps}
+  \includegraphics[width=7.5cm]{pics/git2.eps}
+\end{center}
+%\vspace*{.2cm}
+
+
+
+
 \end{slide}
 
 
