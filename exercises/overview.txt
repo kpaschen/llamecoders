@@ -1,0 +1,673 @@
+
+======================================================================================
+
+Chapter 1: Intro
+
+
+For the demo, I'd avoid a toy “write a Python function” example. That doesn't demonstrate what makes agentic coding interesting.
+
+Instead, start with a small but real repository and give the agent a task that requires investigation + modification + execution + iteration.
+
+For example:
+
+“Add a --json option to this CLI. It should output the same information as the existing human-readable output, update the tests, and preserve the existing behavior when the option isn't specified.”
+
+Then let the agent work.
+
+The audience can watch it:
+
+inspect the repository,
+find the CLI implementation,
+find the existing tests,
+formulate a plan,
+modify several files,
+run the tests,
+encounter a problem,
+fix it,
+run the tests again.
+
+That demonstrates the central idea far better than showing the final code.
+
+An even better demo: plant a trap
+
+If you have time, deliberately include something that isn't immediately obvious—for example:
+
+a non-standard project convention,
+an existing helper the agent should reuse,
+a test that captures an edge case,
+or a subtle compatibility requirement.
+
+Then the interesting question becomes:
+
+Will the agent discover this?
+
+This gives you a natural opportunity to discuss both the power and the
+limitations of agents.
+
+
+======================================================================================
+
+Chapter 2: Environment
+
+
+I'd finish the chapter with a single checklist slide.
+
+Before we start coding
+☐ Editor / IDE installed
+☐ Agent enabled
+☐ Terminal works
+☐ Git installed
+☐ Repository created
+☐ Project runs
+☐ Tests run
+☐ Agent can read/write project
+☐ Agent can run commands
+☐ Permissions understood
+
+Then:
+
+If all boxes are checked, you're ready for agentic coding.
+
+This is probably more useful than 10 slides explaining setup details.
+
+
+======================================================================================
+
+Chapter 4: From Problem to Specification
+
+
+I'd make this the centerpiece rather than just another small exercise.
+
+Phase 1 — Vague prompt
+
+Give everyone something like:
+
+Write a program that analyzes my experimental data.
+
+Let the agent work.
+
+Then run the resulting program.
+
+Don't immediately tell participants what is wrong. Instead ask:
+
+What did the agent assume?
+Which decisions did it make without asking?
+Which assumptions are reasonable?
+Which are dangerous?
+What information would have prevented the problem?
+
+This creates a list on the board.
+
+Phase 2 — Specification workshop
+
+Now give them a template:
+
+Goal
+
+What are we trying to accomplish?
+
+Input
+What files?
+What format?
+What columns?
+What units?
+What constitutes valid data?
+Processing
+What calculations?
+What algorithms?
+What grouping?
+What thresholds?
+Output
+Which files?
+Which columns?
+Which plots?
+Which format?
+Constraints
+Allowed libraries?
+Runtime?
+Performance?
+Don't modify source data?
+Reproducibility?
+Edge cases
+Missing values?
+Empty files?
+Duplicate measurements?
+Invalid values?
+One observation in a group?
+Examples
+
+Input → expected output.
+
+Acceptance criteria
+
+How can we automatically determine whether it works?
+
+That gives participants something concrete to work with rather than asking them to "write a better prompt."
+
+9. Then give the agent the improved specification
+
+This is where the experiment becomes particularly nice.
+
+Use the same agent, same repository, same data, same task.
+
+Only change the specification.
+
+Then compare:
+
+Vague specification
+implementation choices made by the agent
+assumptions
+unnecessary features
+incorrect interpretations
+missing edge cases
+tests
+
+versus:
+
+Detailed specification
+implementation
+tests
+output
+behavior on edge cases
+assumptions
+
+
+You can even have participants score both implementations:
+
+					Vague	Specified
+Correct output		
+Handles edge cases		
+Tests		
+Unnecessary functionality		
+Manual fixes required		
+Matches intended behavior
+
+
+That makes the lesson empirical rather than philosophical.
+
+
+======================================================================================
+
+Chapter 5: Structuring the Code
+
+
+I would make this a fairly substantial hands-on exercise.
+
+Give everybody the same specification from the previous section, for example:
+
+Build a command-line application that reads experimental measurements, cleans the data, computes summary statistics, detects anomalies, generates plots, and produces a report.
+
+Step 1 — Ask the agent
+
+Prompt:
+
+“Based on this specification, propose an architecture for the project. Identify the main modules, their responsibilities, interfaces, dependencies, and proposed project structure. Do not write implementation code yet.”
+
+The important restriction is:
+
+Don't let the agent immediately code.
+
+Step 2 — Critique the architecture
+
+Now give students a checklist.
+
+Responsibilities
+Does every module have a clear purpose?
+Are any modules doing too many unrelated things?
+Are there unnecessary modules?
+Interfaces
+What does each module expose?
+Are the interfaces simple?
+Does one module need to know too much about another?
+Dependencies
+Which modules depend on which?
+Are there circular dependencies?
+Could a change in one module unnecessarily affect many others?
+Testing
+Can important components be tested independently?
+Where would the tests live?
+Agent boundaries
+
+This is the special part:
+
+If the agent is told to modify anomaly detection, where should it work?
+Can it make that change without modifying five other modules?
+Is it obvious which files it should inspect?
+Are there boundaries the agent might accidentally cross?
+10. A particularly good exercise variation: two architectures
+
+You could deliberately ask the agent for two alternatives:
+
+Architecture A — simple
+main.py
+data.py
+analysis.py
+report.py
+Architecture B — more decomposed
+data/
+analysis/
+visualization/
+reporting/
+cli/
+
+Then ask students:
+
+Which architectural decisions are actually justified by the specification?
+
+This gets you away from the simplistic idea that:
+
+“More modules = better architecture.”
+
+Instead:
+
+The architecture should be proportional to the problem.
+
+That is an important lesson when working with coding agents, because agents are often quite happy to produce elaborate architectures.
+
+11. Step 3 — Have the agent implement only one component
+
+This is where the exercise becomes interesting.
+
+After the architecture has been agreed upon, tell the agent:
+
+“Implement only the anomalies module according to the agreed architecture. Do not modify other modules unless absolutely necessary. Add appropriate tests.”
+
+Then students inspect the diff.
+
+Ask:
+
+Did the agent respect the architecture?
+
+This gives them something much more concrete to evaluate than “does the code look good?”
+
+They can check:
+
+✓ correct module
+✓ correct interface
+✓ tests added
+✓ no unrelated changes
+✓ dependencies respected
+12. Then deliberately violate the architecture
+
+I think this would make an excellent short demonstration.
+
+Tell the agent:
+
+“Add this feature. You may modify any files you think are necessary.”
+
+Compare that with:
+
+“Add this feature. Follow the existing architecture. The change should be confined to the analysis module and its tests unless an interface change is required.”
+
+Then show the resulting diffs.
+
+The lesson isn't that agents always obey architectural boundaries. Rather:
+
+Explicit architecture gives you something concrete against which you can
+constrain and review agent behavior.
+
+
+I would make this a fairly substantial hands-on exercise.
+
+Give everybody the same specification from the previous section, for example:
+
+Build a command-line application that reads experimental measurements, cleans the data, computes summary statistics, detects anomalies, generates plots, and produces a report.
+
+Step 1 — Ask the agent
+
+Prompt:
+
+“Based on this specification, propose an architecture for the project. Identify the main modules, their responsibilities, interfaces, dependencies, and proposed project structure. Do not write implementation code yet.”
+
+The important restriction is:
+
+Don't let the agent immediately code.
+
+Step 2 — Critique the architecture
+
+Now give students a checklist.
+
+Responsibilities
+Does every module have a clear purpose?
+Are any modules doing too many unrelated things?
+Are there unnecessary modules?
+Interfaces
+What does each module expose?
+Are the interfaces simple?
+Does one module need to know too much about another?
+Dependencies
+Which modules depend on which?
+Are there circular dependencies?
+Could a change in one module unnecessarily affect many others?
+Testing
+Can important components be tested independently?
+Where would the tests live?
+Agent boundaries
+
+This is the special part:
+
+If the agent is told to modify anomaly detection, where should it work?
+Can it make that change without modifying five other modules?
+Is it obvious which files it should inspect?
+Are there boundaries the agent might accidentally cross?
+10. A particularly good exercise variation: two architectures
+
+You could deliberately ask the agent for two alternatives:
+
+Architecture A — simple
+main.py
+data.py
+analysis.py
+report.py
+Architecture B — more decomposed
+data/
+analysis/
+visualization/
+reporting/
+cli/
+
+Then ask students:
+
+Which architectural decisions are actually justified by the specification?
+
+This gets you away from the simplistic idea that:
+
+“More modules = better architecture.”
+
+Instead:
+
+The architecture should be proportional to the problem.
+
+That is an important lesson when working with coding agents, because agents are often quite happy to produce elaborate architectures.
+
+11. Step 3 — Have the agent implement only one component
+
+This is where the exercise becomes interesting.
+
+After the architecture has been agreed upon, tell the agent:
+
+“Implement only the anomalies module according to the agreed architecture. Do not modify other modules unless absolutely necessary. Add appropriate tests.”
+
+Then students inspect the diff.
+
+Ask:
+
+Did the agent respect the architecture?
+
+This gives them something much more concrete to evaluate than “does the code look good?”
+
+They can check:
+
+✓ correct module
+✓ correct interface
+✓ tests added
+✓ no unrelated changes
+✓ dependencies respected
+12. Then deliberately violate the architecture
+
+I think this would make an excellent short demonstration.
+
+Tell the agent:
+
+“Add this feature. You may modify any files you think are necessary.”
+
+Compare that with:
+
+“Add this feature. Follow the existing architecture. The change should be confined to the analysis module and its tests unless an interface change is required.”
+
+Then show the resulting diffs.
+
+The lesson isn't that agents always obey architectural boundaries. Rather:
+
+Explicit architecture gives you something concrete against which you can
+constrain and review agent behavior.
+
+
+======================================================================================
+
+Chapter 6: Implementation
+
+
+I would make this the centerpiece of the chapter.
+
+Give them perhaps 60–90 minutes to implement one substantial vertical slice of their course project.
+
+The instructions could be approximately:
+
+Step 1 — Choose a task
+
+Select one meaningful component from the architecture.
+
+Step 2 — Define the task
+
+Write down:
+
+Goal:
+Relevant components:
+Constraints:
+Acceptance criteria:
+Step 3 — Ask the agent to inspect and plan
+
+Don't allow implementation yet.
+
+Step 4 — Review the plan
+
+Ask:
+
+Does it fit the architecture?
+Is anything missing?
+Is the task too large?
+Step 5 — Implement
+
+Let the agent make the changes.
+
+Step 6 — Inspect
+
+Use:
+
+git diff
+
+and inspect the important files.
+
+Step 7 — Test
+
+Run existing tests and add tests where appropriate.
+
+Step 8 — Iterate
+
+Give the agent concrete feedback based on evidence.
+
+Step 9 — Review
+
+Check the implementation against the original specification.
+
+Step 10 — Commit
+
+Create a meaningful Git commit.
+
+A particularly useful exercise twist
+
+I would actually require them to encounter at least one iteration.
+
+In other words, don't make the exercise:
+
+“Get the agent to implement the task.”
+
+Instead:
+
+“Implement the task, find at least one problem or improvement, and use the agent to correct it.”
+
+This prevents students from learning the wrong lesson that successful agentic coding means generating correct code on the first attempt.
+
+They should experience:
+
+specification
+     ↓
+task
+     ↓
+agent plan
+     ↓
+implementation
+     ↓
+human inspection
+     ↓
+problem discovered
+     ↓
+agent feedback
+     ↓
+revision
+     ↓
+tests
+     ↓
+commit
+
+That is agentic software development much more than the initial generation
+itself.
+
+
+======================================================================================
+
+Chapter 8: Debugging and Refactoring
+
+
+I would make the central exercise a complete debugging loop.
+
+Give them a project that initially passes its tests.
+
+Then secretly introduce 2–3 bugs.
+
+For example:
+
+Bug A — obvious
+
+A boundary condition:
+
+if index > len(items):
+
+instead of:
+
+if index >= len(items):
+Bug B — less obvious
+
+A failure involving empty input.
+
+Bug C — interaction bug
+
+Each individual component works, but a particular combination of inputs produces the wrong result.
+
+Then give students only:
+
+"Users have reported that the application sometimes produces incorrect results. Find and fix the problems."
+
+Require the agent to produce:
+
+reproduction case
+diagnosis
+proposed fix
+regression test
+test results
+
+That gives you a very nice mini engineering workflow.
+
+8.12 Then deliberately make the agent fail
+
+This could be particularly valuable.
+
+After students have fixed a bug successfully, introduce a situation where the agent's first proposed fix is wrong.
+
+For example:
+
+The agent finds the failing test and changes the implementation so that the test passes — but breaks another case.
+
+Then ask students:
+
+"What went wrong?"
+
+The lesson is subtle but important:
+
+Passing the reported test is not equivalent to fixing the bug.
+
+This naturally leads to:
+
+evaluate
+   ↓
+diagnose
+   ↓
+modify
+   ↓
+evaluate again
+
+rather than:
+
+prompt
+   ↓
+code
+   ↓
+done
+
+
+======================================================================================
+
+Chapter 9: Large and Long-Lived Projects
+
+
+Exercise — maintaining an evolving project
+
+For this chapter, I would reuse the application students developed in the previous chapters, but deliberately turn it into a somewhat larger project.
+
+For example, if the earlier exercises involved an experimental data analysis application, you could extend it with:
+
+Several input formats.
+
+Multiple analysis modules.
+
+A command-line interface.
+
+Configuration files.
+
+A collection of tests.
+
+Documentation and project-specific instructions.
+
+The point is not to create a genuinely large codebase from scratch during the tutorial. It is to simulate the challenges of maintaining one by introducing a few modules, conventions, dependencies, and existing behaviors.
+
+Exercise tasks
+
+Task 1: Explore an unfamiliar codebase
+
+Ask the agent to investigate where a particular feature is implemented, identify the relevant files, and explain the dependencies. Do not let it modify anything yet.
+
+Deliverable: a short explanation of the relevant architecture and proposed implementation location.
+
+Task 2: Establish project instructions
+
+Ask the agent to inspect the project and draft an AGENTS.md file with coding conventions, testing instructions, and scope constraints. Review and improve the file.
+
+Deliverable: project-specific instructions that can be reused in subsequent tasks.
+
+Task 3: Implement an incremental feature
+
+Give the agent a feature request that affects multiple modules. Require a plan, small implementation steps, and verification after each meaningful step.
+
+Deliverable: a working feature with focused changes and relevant tests.
+
+Task 4: Review and recover
+
+Introduce an unrelated change or deliberately make an implementation attempt go wrong. Ask students to inspect the diff, identify the problem, and recover using Git.
+
+Deliverable: a clean working tree with the intended feature preserved and the unwanted changes removed.
+
+Task 5: Hand over the project
+
+Ask students to produce a short handover note that would enable a new agent session to continue the work.
+
+Deliverable: a concise summary of the current state, decisions, known problems, and next steps.
+
+The exercise is deliberately structured to involve several different
+skills. Students should experience that the quality of an agent's work depends
+not only on its code generation but also on how the task is framed, how the
+repository is explored, and how changes are managed.
+
+
+
+
