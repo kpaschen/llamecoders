@@ -1452,11 +1452,11 @@ Structuring the Code
 
 \begin{itemize}
 
-\item The interface defines how the outside world interacts with a module
+\item An interface is a contract between your software and the world.
 
-\item Should not reveal internal implementation details
+\item Your software offers services; the interface specifies how to call those services, and what they return.
 
-\item States which services a module provides
+\item An interface should not reveal internal implementation details
 
 \item Questions to ask yourself are:
 
@@ -1485,20 +1485,36 @@ Structuring the Code
 
 \item There is also indirect, transitive dependency
 
-\item High dependency makes code hard to change or test independently
+\item Dependencies make code harder to manage.
+
+\item Visualize dependencies as a graph, then watch out for:
 
   \begin{itemize}
   
-  \item Which modules depend on which other modules?
+  \item Nodes (modules) with a lot of incoming or outgoing edges (dependencies)
 
-  \item Are there circular dependencies?
+  \item Knots or tangles
 
-  \item Could a change in one modules unnecessarily affect many others?
+  \item Cycles
     
   \end{itemize}
+
+\item Each of those is a sign that your code will be difficult to modify.
   
 \end{itemize}
   
+\end{slide}
+
+\begin{slide}{Dependencies Pt2}
+
+\begin{itemize}
+
+\item If your dependencies are well-chosen, most changes to your system affect only a small number of modules.
+
+\item Benefits human developers but also helps with setting boundaries for agent activities.
+
+\end{itemize}
+
 \end{slide}
 
 
@@ -1669,8 +1685,7 @@ Implementation
 
 \item Divide implementation into (independent) subtasks
 
-\item Structure should help in this; if it doesn't, you may want to
-  reconsider the structure
+\item The implementation plan should follow the module structure. If that doesn't work for you, it's a sign your module structure needs another look.
   
 \item Ideally, we have the following:
 
@@ -1767,7 +1782,7 @@ Implementation
 
 \item However, you can still follow the output as the agent generates the code
 
-\item You may catch something that looks strange
+\item You may catch something that looks strange % TODO: example of what that could look like?
 
 \end{itemize}
   
@@ -2053,9 +2068,7 @@ calculate_average(values):
 
 \item Usually, you have to go through several iterations
   
-\item An agent isn't replacing the development process
-
-\item It is accelerating it
+\item Agents don't replace the development process: they accelerate it
 
 \end{itemize}
   
@@ -3364,12 +3377,12 @@ Large and Long-Lived Projects
 
 \item In a long-lived project, keeping control is challenging
 
-\item Every changed needs to fit into a larger system
+\item Every change needs to fit into a larger system
 
 \item The project should remain understandable, consistent, and recoverable
   over time
   
-\item Project management is much wider than context management
+\item Project management is much bigger than context management
   
 \end{itemize}
 
