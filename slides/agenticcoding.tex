@@ -1505,7 +1505,7 @@ Structuring the Code
   
 \end{slide}
 
-\begin{slide}{Dependencies Pt2}
+\begin{slide}{Dependencies (2)}
 
 \begin{itemize}
 
@@ -3394,9 +3394,316 @@ Large and Long-Lived Projects
 \end{center}
 %\vspace*{.2cm}
 
+\end{slide}
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{slide}{Chapter 10}
+
+\vspace*{2cm}
+
+\begin{center}
+\begin{Huge}
+Wrapping Up
+\end{Huge}
+\end{center}
+
+\end{slide}
+
+
+
+\begin{slide}{What's Agentic Coding Again?}
+
+\begin{itemize}
+
+\item Agentic coding is not just asking an LLM to write code
+
+\item It's an iterative engineering process in which an agent does some of the
+  work
+
+\item An agent reduces the development cost/time
+
+\item It doesn't remove the need to know what you want
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{Overview of Process}
+
+\begin{itemize}
+
+\item Define problem/goal
+
+\item Planning
+  
+  \begin{itemize}
+    
+  \item Create Specification (Chap 4)
+
+  \item Structure Code (Chap 5)
+    
+  \end{itemize}
+
+\item Implementation (Chap 6)
+
+\item Evaluation (Chap 7)
+  
+  \begin{itemize}
+    
+  \item Create and run tests 
+
+  \item Inspect code/diff
+    
+  \end{itemize}
+
+\item Make changes (Chap 8)
+
+  \begin{itemize}
+    
+  \item Debugging
+
+  \item Refactoring
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{What Can an Agent Do?}
+
+\begin{itemize}
+
+\item Write Code
+
+\item Search the codebase
+
+\item Run (and generate) tests
+
+\item Diagnose errors
+
+\item Make changes
+
+\item Explain code
+
+\item Perform routing refactoring
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{What Do Still Need Humans For?}
+
+\begin{itemize}
+
+\item Defining the problem
+
+\item Deciding what \emph{correct} means
+
+\item Setting constraints
+
+\item Making important design decisions
+
+\item Deciding whether a change is acceptable
+
+\item Maintaining direction
+
+\end{itemize}
+  
+\end{slide}
+
+
+
+\begin{slide}{How Should We Treat the Agent?}
+
+\begin{itemize}
+
+\item Look at the agent as a tireless junior intern with very broad knowledge
+  \dots and imperfect judgment
+
+\item How do we support it?
+
+  \begin{itemize}
+    
+  \item Provide clear specification and context
+
+  \item Divide work into manageable tasks
+
+  \item Create a well-structured codebase
+
+  \item Generate/write useful tests
+
+  \item Important: evaluate output and give feedback
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{Verification and Validation}
+
+\begin{itemize}
+
+\item An agent happily produces bad code
+
+\item We need to verify the software
+  
+  \begin{itemize}
+    
+  \item Does it satisfy the specification?
+
+  \item Do the tests pass?
+
+  \item After changes: is the functionality preserved
+    
+  \end{itemize}
+
+\item and validate it
+  
+  \begin{itemize}
+    
+  \item Is this actually what the user needs?
+
+  \item Are the assumptions reasonable?
+
+  \item Is the design appropriate?
+    
+  \end{itemize}
+  
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{A Checklist}
+
+\begin{itemize}
+
+\item Before asking the agent
+
+  \begin{itemize}
+    
+  \item What exactly am I trying to achieve?
+
+  \item What are the constraints?
+
+  \item How will I know it is correct?
+    
+  \end{itemize}
+
+\item Before implementation
+
+  \begin{itemize}
+    
+  \item Is the design sensible?
+
+  \item Can the task be broken into smaller pieces?
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{A Checklist (2)}
+
+\begin{itemize}
+
+\item During implementation
+
+  \begin{itemize}
+ 
+  \item Inspect the plan
+
+  \item Inspect the changes
+
+  \item Run the software/tests
+
+  \item Keep the scope controlled
+    
+  \end{itemize}
+  
+\item After implementation
+
+  \begin{itemize}
+ 
+  \item Does it satisfy the specification?
+
+  \item Did anything unrelated change?
+
+  \item Are there regression tests?
+
+  \item Does the code look maintainable?
+    
+  \end{itemize}
+
+\end{itemize}
+  
+\end{slide}
+
+
+\begin{slide}{A Checklist (3)}
+
+\begin{itemize}
+ 
+\item For long-lived projects:
+
+  \begin{itemize}
+    
+  \item Keep the repository understandable
+
+  \item Keep documentation current
+
+  \item Make small, reviewable changes
+
+  \item Don't let the agent gradually redefine the architecture
+    
+  \end{itemize}
+  
+\end{itemize}
+  
+\end{slide}
+
+    
+    
+\begin{slide}{What Do Developers Say to All This?}
+
+\begin{itemize}
+
+\item Writing code used to be hard, but satisfying
+
+\item Now about reviewing code and supervising an agent
+
+  \begin{itemize}
+    
+  \item More productive, but less satisfying
+    
+  \end{itemize}
+
+\item The skills needed to produce code are shifting
+
+  \begin{itemize}
+    
+  \item But it helps to know what good code looks like
+    
+  \end{itemize}
+
+\end{itemize}
+  
 \end{slide}
 
 
