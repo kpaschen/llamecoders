@@ -61,7 +61,7 @@ Copy the opencode.json from our repository, insert your key, then start opencode
 
 You should get a screen with some orange and white text. Type
 
-`models` to get a list of available models. Some of them are marked as `Free` (they come with opencode), some have names that start with `infomaniak-`, those are available through our proxy. Choose one of the free models for now.
+`/models` to get a list of available models. Some of them are marked as `Free` (they come with opencode), some have names that start with `infomaniak-`, those are available through our proxy. Choose one of the free models for now.
 
 Once you have chosen a model, type `hello`. You should get a reply, possibly after a second or two.
 
