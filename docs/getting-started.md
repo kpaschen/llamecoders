@@ -1,5 +1,12 @@
 # Getting started
 
+## Install a git client
+
+[git installation instructions](https://git-scm.com/install/)
+
+Git is a version control system. It is useful for managing different versions of software that you (or your LLM agent)
+are working on, and for managing changes in teams. For reference, bookmark this [cheatsheet](https://git-scm.com/cheat-sheet).
+
 ## Install Python
 
 You'll need Python version 3.12 or newer.
@@ -48,24 +55,9 @@ The [uv website](https://docs.astral.sh) has more information.
 
 ## Install opencode
 
+[The opencode website](https://opencode.ai/download) has installation instructions.
 
-```
-curl https://opencode.ai/install -o opencode-installer.sh
-# Inspect this script if you want to, then run:
-bash opencode-installer.sh
-```
-
-Alternatively, there is a snap version:
-
-```
-sudo snap install opencode
-```
-
-If you already have Node, this also works:
-
-```
-npm install -g opencode-ai
-```
+We're using opencode v2. At this point, there should be no reason to use v1.
 
 Opencode comes in different versions, and they behave slightly differently. If you're on an older version 
 (like 1.17) you may see failures when trying to access some of our models.
@@ -75,9 +67,20 @@ it can get confused. Stuff that previously worked will suddenly show you strange
 ask for help and we'll see what we can do. However, the easiest option tends to be uninstalling and reinstalling
 opencode.
 
+The opencode docs talk about using a "modern terminal emulator" with opencode; you do not need this, a regular terminal that 
+comes with your Linux or MacOS will do.
+
+The opencode docs also recommend using WSL (Windows Subsystem for Linux) on Windows. This is difficult to set up, so if you don't
+already know how to do this, I recommend against it.
+
 ### Copy the opencode config file
 
-Take the `opencode.json` file from the setup/ directory and copy it to `~/.config/opencode/opencode.json`
+Take the `opencode.json` file from the setup/ directory and copy it to `~/.config/opencode/opencode.json` (on Linux and MacOS) or
+`C:\Users\USER\.opencode\opencode.json` (on Windows; you may need to create the `.opencode` directory first).
+
+You can also place the opencode.json file at the root of your project folder. Opencode will look for config files in various places and merge them together.
+
+If you already have an opencode.json file, you can edit it and add the `infomaniak` provider from our file to yours.
 
 ### Start opencode
 

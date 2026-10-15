@@ -6,13 +6,15 @@ Some of the steps below ask you to open a commandline prompt.
 In Windows, use powershell.
 In Linux or Mac, any terminal with a shell will do.
 
+The steps below verify that you have gone through the [preparation steps](https://github.com/kpaschen/llamecoders/blob/main/docs/getting-started.md) successfully. 
+
 ## Python
 
 You should have installed Python as part of the preparation; if you haven't, please do it now.
 
 In the commandline window, type `python` or `python3`.
 
-You should get a prompt that looks like this:
+You should get a prompt that looks approximately like this:
 
 ```
 Python 3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0] on linux
@@ -31,8 +33,14 @@ In your commandline window, type `git status`. You should get a reply saying you
 Create a directory for the coursework and switch to it in your shell, then
 
 ```
-git clone <coursework repository>
+git clone https://github.com/kpaschen/llamecoders.git
 ```
+
+We're using a github repository that I created. Optionally, if you have a github account,
+ [drop me a mail](mailto:contact@paschen.ch) and I will invite you to the repository as a contributor. I may not 
+keep this repository around long-term, so if you want to keep a copy of it, I recommend you do that locally.
+
+Switch to the ``lamecoders`` directory. We've got setup, documentation, all the slides, and the exercises in here.
 
 ## IDE or Editor
 
@@ -55,13 +63,13 @@ Save it, then run `python hello.py`. You should get the output `Hello World!`.
 
 You should have installed opencode as part of the preparation; if you haven't, please do it now.
 
-Copy the opencode.json from our repository, insert your key, then start opencode:
+Copy the opencode.json from our repository, add your api key to your environment as per the preparation instructions, then start opencode:
 
 `opencode`
 
 You should get a screen with some orange and white text. Type
 
-`/models` to get a list of available models. Some of them are marked as `Free` (they come with opencode), some have names that start with `infomaniak-`, those are available through our proxy. Choose one of the free models for now.
+`/models` to get a list of available models. Some of them are marked as `Free` (they come with opencode), some have names that start with `infomaniak`, those are available through our proxy. Choose one of the free models for now.
 
 Once you have chosen a model, type `hello`. You should get a reply, possibly after a second or two.
 
