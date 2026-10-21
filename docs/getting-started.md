@@ -84,7 +84,12 @@ If you already have an opencode.json file, you can edit it and add the `infomani
 
 ### Start opencode
 
-You should have received a mail with an api key. Hang onto that key, but don't share it with anyone else.
+We will send you an e-mail with an api key the day before the class starts.
+
+If you want to get started without the key, you can just start opencode. It comes with a few free models that you can always use.
+
+Here is how you use the key once you have it:
+Hang onto the key, but don't share it with anyone else.
 
 On Linux and MacOS:
 
@@ -110,7 +115,7 @@ Other tools for interacting with LLMs exist, and you're welcome to use whatever 
 
 ### Optional: visit the llm proxy website 
 
-The email with the api token also contained an invite link. This lets you create an account where you can see the litellm proxy. 
+The email with the api token also contains an invite link. This lets you create an account where you can see the litellm proxy. 
 This lets you track your request and token usage.
 
 The proxy website has tabs for interacting with models, but they will not work for you. The proxy website
