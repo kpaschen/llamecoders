@@ -23,6 +23,13 @@
             "output": 5000
           }
         },
+        "gpt-6-luna": {
+          "name": "gpt-6-luna",
+          "limit": {
+            "context": 10000,
+            "output": 5000
+          }
+        },
         "infomaniak-kimi": {
           "name": "infomaniak-kimi"
         },
@@ -34,6 +41,12 @@
         },
         "infomaniak_gemma": {
           "name": "infomaniak_gemma"
+        },
+        "infomaniak-qwen3.8": {
+          "name": "infomaniak-qwen3.8"
+        },
+        "infomaniak_apertus": {
+          "name": "infomaniak_apertus"
         }
       }
     }
