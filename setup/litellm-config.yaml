@@ -10,6 +10,11 @@ model_list:
        model: openai/gpt-4o-mini
        api_key: os.environ/OPENAI_API_KEY
 
+  - model_name: gpt-6-luna                                       
+    litellm_params:                                              
+       model: openai/gpt-6-luna                                  
+       api_key: os.environ/OPENAI_API_KEY 
+
   - model_name: infomaniak_nvidia
     litellm_params:
        custom_llm_provider: openai
@@ -30,15 +35,15 @@ model_list:
        input_cost_per_token: 0.00000025
        output_cost_per_token: 0.00000049
  
-  - model_name: infomaniak-qwen3.5-122b
-    litellm_params:
-       custom_llm_provider: openai
-       model: Qwen/Qwen3.5-122B-A10B-FP8
+  - model_name: infomaniak-qwen3.8                               
+    litellm_params:                                              
+       custom_llm_provider: openai                               
+       model: Qwen/Qwen3.8-27B-FP8                               
        api_base: https://api.infomaniak.com/2/ai/109660/openai/v1
-       api_key: os.environ/INFOMANIAK_API_KEY
-    model_info:
-       input_cost_per_token: 0.00000049
-       output_cost_per_token: 0.0000039
+       api_key: os.environ/INFOMANIAK_API_KEY                    
+    model_info:                                                  
+       input_cost_per_token: 0.00000048                          
+       output_cost_per_token: 0.0000036
 
   - model_name: infomaniak-qwen3.5
     litellm_params:
@@ -49,6 +54,16 @@ model_list:
     model_info:
        input_cost_per_token: 0.00000098
        output_cost_per_token: 0.0000044
+
+  - model_name: infomaniak_apertus                               
+    litellm_params:                                              
+       custom_llm_provider: openai                               
+       model: swiss-ai/Apertus-v1.5-70B                          
+       api_base: https://api.infomaniak.com/2/ai/109660/openai/v1
+       api_key: os.environ/INFOMANIAK_API_KEY                    
+    model_info:                                                  
+       input_cost_per_token: 0.00000085                          
+       output_cost_per_token: 0.0000030 
 
   - model_name: infomaniak-kimi
     litellm_params:
