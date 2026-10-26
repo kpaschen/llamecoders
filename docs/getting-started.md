@@ -142,3 +142,5 @@ Visual Studio Code is a free development environment that works with Python. It 
 
 One that works with our setup is `continue.dev`. After installing this extension, start it. Where it wants you to choose/configure models, choose `local`, then `skip and configure manually`. This pops up an editor with 
 a default config. There's a sample `continue config` in the `setup` directory of this repo.
+
+Note that Infomaniak will throttle you when you try the `autocomplete` mode in continue.
