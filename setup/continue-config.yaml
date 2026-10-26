@@ -22,7 +22,6 @@ models:
     - edit
     - summarize
     - chat
-    - autocomplete
     - apply
 context:
   - provider: code
