@@ -75,6 +75,13 @@ model_list:
        input_cost_per_token: 0.00000073
        output_cost_per_token: 0.000000367
 
+router_settings:
+  num_retries: 3
+  timeout: 30              
+  cooldown_time: 5 
+  global_max_parallel_requests: 12
+  default_rpm: 55 
+
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
   disable_env_credential_login: true
