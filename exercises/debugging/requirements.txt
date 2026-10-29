@@ -1,0 +1,22 @@
+# Project requirements
+#
+# Runtime: the application (src/) uses only the Python 3 standard library
+# (csv, os, sys, json, math) - there are no third-party runtime dependencies.
+#
+# The packages below are required for running tests and coverage:
+#   pip install -r requirements.txt
+#   python -m pytest
+#   python -m pytest --cov=src
+
+# Testing
+pytest==9.2.0
+pytest-cov==7.1.0
+
+# Coverage (used directly and by pytest-cov)
+coverage==7.17.0
+
+# Transitive dependencies of pytest / pytest-cov
+iniconfig==2.3.1
+packaging==26.3
+pluggy==1.7.0
+Pygments==2.21.0
