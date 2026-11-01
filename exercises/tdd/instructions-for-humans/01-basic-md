@@ -1,0 +1,7 @@
+In opencode, run `/skills`, then select the `tdd` skill. Your prompt should now begin with `@tdd`.
+
+In principle, the skill should be used automatically when you ask the agent to write code, but `@tdd` is
+how you can force this.
+
+Ask the agent to write code. You can use any of the other exercises, or make one up for yourself. 
+You should see the agent writing the test first.
