@@ -9,3 +9,5 @@ The optimizer will then call the profiler, who will verify that the code is fast
 If you want to see the loop in action, either ask it to process the full stock.zip file or reduce the SLA in AGENTS.md.
 
 The optimizer agent file has instructions to stop looping after three iterations.
+
+[Demo video](https://drive.switch.ch/index.php/s/pQcinsetmgsm9a8)
